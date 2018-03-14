@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-navbar color="appPrimary">
+    <ion-title>Registration</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="touchClose()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content class="contentPage">
+  <div class="upperContent">
+    <div class="page" *ngIf="currentStep === 0" [ngClass]="{ showPage : showPage}">
+      <form (ngSubmit)="submitFrm0()" #frm0="ngForm" >
+        <ion-item>
+          <ion-label style="margin:0"></ion-label>
+          <ion-select [(ngModel)]="data0.country" placeholder="Country" class="selectStyle1" name="country">
+            <ion-option [value]="c" *ngFor="let c of gp.app.countries">{{c.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">Mobile number (Without country code)</ion-label>
+          <ion-input type="number" [(ngModel)]="data0.mobileNumber" name="mobileNumber" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">E-Mail</ion-label>
+          <ion-input type="email" [(ngModel)]="data0.email" name="email" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">Choose an username</ion-label>
+          <ion-input type="text" [(ngModel)]="data0.username" name="username" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+      </form>
+      <div class="attention">A SMS text will be send to
+        <span *ngIf="!data0.country || !data0.mobileNumber">the mobile number informed by you</span>
+        <span *ngIf="data0.country && data0.mobileNumber" class="mobileNumberDesc">+{{data0.country.areaCode}}{{data0.mobileNumber.substring(0,1) === '0' ? data0.mobileNumber.substring(1) : data0.mobileNumber }}</span>
+        . This must be confirmed before
+        continue
+      </div>
+    </div>
+    <div class="page sms" *ngIf="currentStep === 1" [ngClass]="{ showPage : showPage}">
+      <ion-input (keyup)="keyUpCode()" #codeInput class="dummyInput" maxlength="4" [(ngModel)]="code" type="number" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)"></ion-input>
+      <div class="codeInput" (click)="retypeCode()">
+        <div>{{code.length >=1 ? code.substring(0,1) : '' }}</div>
+        <div>{{code.length >=2 ? code.substring(2,1) : '' }}</div>
+        <div>{{code.length >=3 ? code.substring(3,2) : '' }}</div>
+        <div class="lastDigit">{{code.length >=4 ? code.substring(4,3) : '' }}</div>
+      </div>
+      <button ion-button outline color="appPrimary" class="btnSendCode" (click)="touchSendAgain()">
+        Send the code again
+        <span *ngIf="ctdDown >0">&nbsp;({{ctdDown}})</span>
+      </button>
+    </div>
+    <div class="page" *ngIf="currentStep === 2" [ngClass]="{ showPage : showPage}">
+
+      <form (ngSubmit)="submitFrm2()" #frm2="ngForm">
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">First Name</ion-label>
+          <ion-input type="text" [(ngModel)]="data2.firstName" name="email" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">Last Name</ion-label>
+          <ion-input type="text" [(ngModel)]="data2.lastName" name="password" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">Choose a password</ion-label>
+          <ion-input type="password" [(ngModel)]="data2.pass1" name="password" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating class="labelOnWhiteForms">Confirm your password</ion-label>
+          <ion-input type="password" [(ngModel)]="data2.pass2" name="password" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+        </ion-item>
+      </form>
+    </div>
+    <div class="page picture" *ngIf="currentStep === 3" [ngClass]="{ showPage : showPage}">
+      <div class="picWrapper">
+        <img src="{{'data:image/png;base64,' + base64Image}}" *ngIf="base64Image" />
+      </div>
+      <div class="cameraButton">
+        <button ion-button outline color="appPrimary" class="btnSendCode" (click)="invokeCamera(false)">Select from camera</button>
+      </div>
+      <div class="cameraButton">
+      <button ion-button outline color="appPrimary" class="btnSendCode" (click)="invokeCamera(true)">Select from album</button>
+      </div>
+      <div class="canSkip">You can skip this for now, if you wish</div>
+    </div>
+    <div class="page lastPage" *ngIf="currentStep === 4" [ngClass]="{ showPage : showPage}">
+      <div class="toggleGroup">Select at least one service</div>
+        <ion-item *ngFor="let s of servicesForm ; let i = index">
+          <ion-label><ion-icon color="appPrimary" name="information-circle" (click)="touchServiceInfo(s)"></ion-icon> {{s.name}}</ion-label>
+          <ion-toggle [(ngModel)]="servicesForm[i].inUse" color="appPrimary" name="privacy"></ion-toggle>
+        </ion-item>
+        <div class="toggleGroup">Initial Privacy settings</div>
+        <ion-item *ngFor="let p of privacyForm">
+          <ion-label>{{p.desc}}</ion-label>
+          <ion-toggle [(ngModel)]="p.selected" color="appPrimary" name="privacy"></ion-toggle>
+        </ion-item>
+    </div>
+  </div>
+  <div class="lowerContent" [ngClass]="{ hideLower : !lowerVisible }" [style.top.px]="lowerPos">
+    <step-progress [step]="currentStep" [steps]="5"></step-progress>
+    <div class="stepDesc" *ngIf="currentStep === 0">First, we need to know some basics about you</div>
+    <div class="stepDesc" *ngIf="currentStep === 1">When you receive the code by SMS, please type it</div>
+    <div class="stepDesc" *ngIf="currentStep === 2">It's the last page that's requires your keyboard.</div>
+    <div class="stepDesc" *ngIf="currentStep === 3">Place your picture</div>
+    <div class="stepDesc" *ngIf="currentStep === 4">Almost there !</div>
+    <button ion-button
+            color="appPrimary"
+            ion-button block full large clear
+            (click)="submit()">{{buttonText}}</button>
+    <!--<button class="btnContinue" ion-button color="appPrimary" ion-button block full large clear (click)="touchContinue()">
+      Continue
+    </button>-->
+  </div>
+</ion-content>

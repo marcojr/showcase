@@ -1,0 +1,133 @@
+page-sign-up {
+  .swiper-pagination-bullet-active {
+    background: map-get($colors, appPrimary);
+  }
+  .contentPage {
+    background-color: map-get($colors, appPageBkg);
+  }
+  .lowerContent {
+    //position: relative;
+    position: fixed;
+    //bottom: 25px;
+    width: 100%;
+    height: 110px;
+    background-color: map-get($colors, appPageBkg);
+  }
+  .upperContent {
+    height: calc(100% - 130px);
+    background-color: map-get($colors, appPageBkg);
+  }
+  .page {
+    opacity: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    -webkit-transition: opacity 500ms ease-in-out;
+    -moz-transition: opacity 500ms ease-in-out;
+    -ms-transition: opacity 500ms ease-in-out;
+    -o-transition: opacity 500ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
+  }
+  .mobileNumberDesc {
+    font-weight: bold;
+    color: black;
+  }
+  .btnContinue {
+    position: absolute;
+    bottom: 0px;
+  }
+  .stepDesc {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: black;
+  }
+  .smsConfirmTxt {
+    font-size: 10px;
+    text-align: center;
+    padding-top: 20px;
+  }
+  .attention {
+    font-size: 10px;
+    text-align: center;
+    color: red;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    opacity: 0.6;
+  }
+  .codeInput {
+    height: 50px;
+    width: 50px * 4 + (3 * 15);
+    margin-left: calc(50% - 122.5px);
+    div {
+      float: left;
+      background-color: lightGray;
+      color: map-get($colors, appFontInsidePrimary);
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      margin-right: 15px;
+      font-size: 24px;
+      line-height: 50px;
+      border-radius: 5px;
+    }
+    .lastDigit{
+      margin-right: 0px;
+    }
+  }
+  .btnSendCode {
+    margin-top: 20px;
+  }
+  .dummyInput {
+    position: relative;
+    margin-left:-200px;
+    //opacity: 0;
+    //top: -45px;
+  }
+  .hideLower {
+    //display: none;
+  }
+  .sms {
+    text-align: center;
+  }
+  .picture {
+    text-align:center;
+    .picWrapper {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 75px;
+        border: 3px solid map-get($colors, appPrimary);
+    }
+    button {
+      width: 200px;
+    }
+  }
+  .toggleGroup{
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    color: map-get($colors, appPrimary)
+  }
+  .showPage{
+    opacity: 1;
+  }
+  .canSkip {
+    padding: 20px;
+    font-size: 10px;
+  }
+  .cameraButton {
+    width: 100%;
+    text-align: center
+  }
+  .lastPage {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+  }
+}

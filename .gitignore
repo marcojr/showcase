@@ -1,0 +1,8 @@
+DS_Store
+.idea/
+/node/*
+angular/*
+ionic/node_modules
+ionic/www/
+ionic/plugins
+ionic/platforms

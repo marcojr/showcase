@@ -1,0 +1,61 @@
+<ion-header></ion-header>
+<ion-content class="pageContent">
+  <div class="logoContainer"
+    [ngClass]="{ logoContainerCollapse :platform.is('android') && hideFooter,
+     logoContainer_iphoneX : platform.is('ios')}">
+    <img class="logo" src="assets/imgs/logo_wt_text.png" />
+    <div class="mot" [style.opacity]="loginMode || hideFooter ? 0 : 1">
+      A different way to interact with people.<br>
+      It's all about privacy, respect and content quality.
+    </div>
+  </div>
+  <div class="login" *ngIf="loginMode" [style.opacity]="displayLogin ? 1 : 0">
+    <ion-grid class="fields">
+      <ion-row>
+        <ion-col col-auto class="icon">
+          <ion-icon name="person"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-item no-padding no-lines no-border no-margin>
+            <ion-input #usernameInput [(ngModel)]="login.username" #loginId class="field" type="text" placeholder="Username or Mobile"
+                       tabindex="1" (keyup.enter)="passwordInput.close();" (ionFocus)="hideFooter = true" (ionBlur)="hideFooter = false"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto class="icon">
+          <ion-icon name="lock"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-item no-padding no-lines no-border no-margin>
+            <ion-input #usernameInput [(ngModel)]="login.password" #password type="Password" placeholder="Password"
+                       tabindex="2" (keyup.enter)="touchLogMeIn();" (ionFocus)="hideFooter = true" (ionBlur)="hideFooter = false"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="loginActions">
+      <div class="passForgot" (click)="touchForgotPassword()">Forgot your<br>password ?</div>
+      <button ion-button color="appFontInsidePrimary" round (click)="touchLogMeIn()" class="loginButton">
+        Log me in
+      </button>
+    </div>
+    <div class="cancelLogin" (click)="touchCancelLogin()">Cancel</div>
+  </div>
+  <div class="buttons" *ngIf="!loginMode">
+    <button ion-button color="appFontInsidePrimary" round (click)="touchSignUp()">
+      New User
+    </button>
+    <button ion-button color="appFontInsidePrimary" round (click)="touchLogin()">
+      Login
+    </button>
+  </div>
+</ion-content>
+<ion-footer class="pageFooter" no-border [ngClass]="{ hideFooter: hideFooter && platform.is('android')}">
+  <div>
+    The Golden Commandments
+  </div>
+  <div>
+    FAQ
+  </div>
+</ion-footer>

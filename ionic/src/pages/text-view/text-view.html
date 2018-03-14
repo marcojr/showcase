@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar color="appPrimary">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <p>{{text}}</p>
+</ion-content>
+<ion-footer *ngIf="buttonTxt !== ''">
+  <button ion-button color="appPrimary" ion-button block full large clear (click)="touchButton()">I Agree</button>
+</ion-footer>

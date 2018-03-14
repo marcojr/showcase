@@ -1,0 +1,73 @@
+$font-path: "../assets/fonts";
+
+
+$app-direction: ltr;
+
+
+@import "ionic.globals";
+
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  appPrimary :  #51c8d4,
+  appFontInsidePrimary: white,
+  appFontInsidePrimaryAlternative: black,
+  appPageBkg: #fbfbfb
+);
+$text-input-highlight-color-valid: #c8c7cd;
+$text-input-md-highlight-color: #c8c7cd;
+$label-md-text-color-focused : #c8c7cd;
+
+@import "ionic.theme.default";
+@import "ionic.ionicons";
+@import "roboto";
+@import "noto-sans";
+.toast-wrapper {
+  left: 0px !important;
+  right: 0px !important;
+  max-width: 100% !important;
+  bottom: -10px !important;
+}
+.alertError {
+  .toast-container {
+    background-color: Red;
+    color: white;
+  }
+}
+.alertOk {
+  .toast-container {
+    background-color: green;
+    color: black;
+  }
+}
+.alertWarning {
+  .toast-container {
+    background-color: orange;
+    color: black;
+  }
+}
+.selectStyle1 {
+  padding-left: 0px !important;
+  width: 100%;
+  max-width: 100%;
+  .select-text {
+    color: black;
+  }
+  .select-icon {
+    position: absolute !important;
+    right: 20px;
+    .select-icon-inner {
+      color: map-get($colors, appPrimary) !important;
+    }
+  }
+  .select-placeholder {
+
+  }
+}
+.labelOnWhiteForms {
+  color: #a2a2a2;
+}
