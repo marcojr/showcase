@@ -22,15 +22,15 @@ export class SignUpPage {
   @ViewChild("frm3") frm3: ElementRef;
   @ViewChild('codeInput') codeInput;
   data0 = {
-    mobileNumber: '7903450712' ,
-    email: 'fanz@me.com',
+    mobileNumber: '' ,
+    email: '',
     country: undefined,
-    username: 'zemane'
+    username: ''
   };
   data2 = {
-    name: '7903450712' ,
-    pass1: 'Abc1234',
-    pass2: 'Abc1234'
+    name: '' ,
+    pass1: '',
+    pass2: ''
   };
   uuidPhone: string;
   buttonText: string = 'Continue';
