@@ -1,5 +1,4 @@
 This is just a dummy project for people with intentions to hire my services.
-it's a dummy application.
 
 It's basically a demonstration of my source code on the following contexts
 
@@ -17,6 +16,19 @@ For now, only the following user stories are done:
     - {BE} Check if the mobile is already in use
     - {BE} Send a SMS text message to FE containing a code before proceed
     - {BE} Store the user's picture on the Amazon AWS S3 Bucket
+- As an user, I'd like to login on the app
+    - {FE} Place fields on the welcome page
+    - {FE} Call Login endpoint
+    - {FE} Store User Login Information on the local storage
+    - {FE} Skip the Welcome/Login Page and perform a auto-login on the app
+           if the app found login information stored locally
+    - {BE} Endpoint for Login and store a session token
+- As an user, I'd like to logout from the app
+    - {FE} Place a logout button
+    - {FE} Call logout endpoint
+    - {FE} Go back to the Welcome/Login screen
+    - {FE} Clear Local storage data
+    - {BE} Endpoint for logout and clear session
 
 ...But it's enough to evaluate me indeed. I will create more features everytime I've a chance.
 
