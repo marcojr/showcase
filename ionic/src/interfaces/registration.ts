@@ -1,4 +1,4 @@
-import {Country, Text, Service, PrivacyOption, NameStructure, Address} from "./app";
+import {Country, Text, Venue, PrivacyOption, NameStructure, Address} from "./app";
 
 //Responses
 export interface ResGetReady {
@@ -6,7 +6,7 @@ export interface ResGetReady {
   data : {
     countries : Country [],
     texts : Text,
-    services : Service [],
+    venues : Venue [],
     privacyOptions: PrivacyOption []
   }
 }
@@ -48,7 +48,7 @@ export interface ReqRegister {
   bio : string,
   gender : string,
   address : Address,
-  services: string [],
+  venues: string [],
   email : string,
   privacyOptions : PrivacyOption [],
   tos : string,

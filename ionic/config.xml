@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.marcojr.lemonice" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Lemonice</name>
-    <description>A different way to interact with people</description>
+<widget id="br.com.marcojr.simpsons" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>The Simpsons</name>
+    <description>Just an app that's make you register yourself</description>
     <author email="contato@marcojr.com.br" href="http://www.marcojr.com.br">Marco S. Junior</author>
     <content src="index.html" />
     <access origin="*" />

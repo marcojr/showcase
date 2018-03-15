@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { GlobalProvider } from "../../providers/global/global";
 import { TextViewPage } from "../text-view/text-view";
-import { Service, PrivacyOption } from "../../interfaces/app";
+import { Venue, PrivacyOption } from "../../interfaces/app";
 import { ReqConfirmSMS, ReqRegister } from "../../interfaces/registration";
 import { AlertController } from 'ionic-angular';
 import { WelcomePage } from "../welcome/welcome";
@@ -28,8 +28,7 @@ export class SignUpPage {
     username: 'zemane'
   };
   data2 = {
-    firstName: '7903450712' ,
-    lastName: 'fanz@me.com',
+    name: '7903450712' ,
     pass1: 'Abc1234',
     pass2: 'Abc1234'
   };
@@ -37,7 +36,7 @@ export class SignUpPage {
   buttonText: string = 'Continue';
   code: string = '';
   fullMobileNumber: string ;
-  servicesForm: Service[] = [];
+  venuesForm: Venue[] = [];
   privacyForm = [];
   currentStep: number = 0;
   lowerVisible: boolean = true;
@@ -51,12 +50,12 @@ export class SignUpPage {
               private alertCtrl: AlertController,
               public registrationProvider: RegistrationProvider,
               private camera: Camera) {
-    this.gp.app.services.forEach((item: Service) => {
+    this.gp.app.venues.forEach((item: Venue) => {
       let itm = item;
       itm.inUse = false;
-      for (let i = 0; i < this.gp.allowedServices.length; i++) {
-        if (this.gp.allowedServices[i] === itm.key) {
-          this.servicesForm.push(itm);
+      for (let i = 0; i < this.gp.allowedVenues.length; i++) {
+        if (this.gp.allowedVenues[i] === itm.key) {
+          this.venuesForm.push(itm);
         }
       }
     });
@@ -100,7 +99,6 @@ export class SignUpPage {
     }
     this.fullMobileNumber = this.data0.country.areaCode + this.data0.mobileNumber;
     this.performAllAvailabilityChecks().then((result) => {
-      console.log(99,result);
       let passed = true;
       for(let i=0; i < result.length;i++) {
         if(result[i].error) {
@@ -186,9 +184,8 @@ export class SignUpPage {
     })
   }
   submitFrm2():void {
-    if (this.data2.firstName.length > 20 || this.data2.firstName.length < 2 ||
-        this.data2.lastName.length > 20 || this.data2.lastName.length < 2) {
-      this.gp.showNotification("First and last names must have between 2 and 15 characters", 'alertError');
+    if (this.data2.name.length > 50 || this.data2.name.length < 2) {
+      this.gp.showNotification("Your name must have between 2 and 50 characters", 'alertError');
       return;
     }
     if (this.data2.pass1 === '' || this.data2.pass1 === '') {
@@ -223,7 +220,6 @@ export class SignUpPage {
     this.startCountDown();
   }
   submit():void {
-    console.log(this.currentStep);
     if (this.currentStep === 0) {
       this.frm0['ngSubmit'].emit();
     }
@@ -309,7 +305,6 @@ export class SignUpPage {
       sourceType: fromAlbum ? this.camera.PictureSourceType.PHOTOLIBRARY : this.camera.PictureSourceType.CAMERA,
     }
     this.camera.getPicture(options).then((imageData) => {
-      console.log(imageData);
       this.base64Image = imageData;
     });
   }
@@ -331,18 +326,18 @@ export class SignUpPage {
       }
       return results;
     }
-    let getServicesSelections = () => {
+    let getVenuesSelections = () => {
       let results = [];
-      for(let i=0 ; i < this.servicesForm.length; i++) {
-        if(this.servicesForm[i].inUse) {
-          results.push(this.servicesForm[i].key);
+      for(let i=0 ; i < this.venuesForm.length; i++) {
+        if(this.venuesForm[i].inUse) {
+          results.push(this.venuesForm[i].key);
         }
       }
       return results;
     }
-    let serviceSelections = getServicesSelections();
-    if(serviceSelections.length < 1) {
-      this.gp.showNotification("Choose at least one service", 'alertError');
+    let venuesSelections = getVenuesSelections();
+    if(venuesSelections.length < 1) {
+      this.gp.showNotification("Choose at least one venue", 'alertError');
       return;
     }
     this.registration = {
@@ -353,9 +348,7 @@ export class SignUpPage {
       "password": this.data2.pass1,
       "name":{
         "title": "",
-        "first": this.data2.firstName,
-        "last": this.data2.lastName,
-        "displayName": this.data2.firstName + ' ' + this.data2.lastName
+        "name": this.data2.name
       },
       "bio":"",
       "gender": null,
@@ -372,12 +365,10 @@ export class SignUpPage {
       },
       "email": this.data0.email,
       "privacyOptions": getPrivacySelections(),
-      "services" : serviceSelections,
+      "venues" : venuesSelections,
       "tos": this.gp.app.texts.tos,
       "customData" : null
     }
-    console.log(this.registration);
-    console.log(JSON.stringify(this.registration));
     this.gp.presentLoader("Registering you...");
     this.registrationProvider.register(this.registration).subscribe((res) =>{
       this.gp.dismissLoader();

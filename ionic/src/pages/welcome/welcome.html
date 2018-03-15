@@ -3,11 +3,7 @@
   <div class="logoContainer"
     [ngClass]="{ logoContainerCollapse :platform.is('android') && hideFooter,
      logoContainer_iphoneX : platform.is('ios')}">
-    <img class="logo" src="assets/imgs/logo_wt_text.png" />
-    <div class="mot" [style.opacity]="loginMode || hideFooter ? 0 : 1">
-      A different way to interact with people.<br>
-      It's all about privacy, respect and content quality.
-    </div>
+    <img class="logo" src="assets/imgs/homer.png" />
   </div>
   <div class="login" *ngIf="loginMode" [style.opacity]="displayLogin ? 1 : 0">
     <ion-grid class="fields">
@@ -18,7 +14,7 @@
         <ion-col>
           <ion-item no-padding no-lines no-border no-margin>
             <ion-input #usernameInput [(ngModel)]="login.username" #loginId class="field" type="text" placeholder="Username or Mobile"
-                       tabindex="1" (keyup.enter)="passwordInput.close();" (ionFocus)="hideFooter = true" (ionBlur)="hideFooter = false"></ion-input>
+                     tabindex="1" (keyup.enter)="passwordInput.close();" (ionFocus)="hideFooter = true" (ionBlur)="hideFooter = false"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -51,11 +47,6 @@
     </button>
   </div>
 </ion-content>
-<ion-footer class="pageFooter" no-border [ngClass]="{ hideFooter: hideFooter && platform.is('android')}">
-  <div>
-    The Golden Commandments
-  </div>
-  <div>
-    FAQ
-  </div>
-</ion-footer>
+<div class="footerImg" [ngClass]="{ hideFooter: hideFooter && platform.is('android')}">
+  <img src="assets/imgs/springfield.png" />
+</div>

@@ -1,5 +1,6 @@
 <ion-header>
   <ion-navbar color="appPrimary">
+    <img class="nelson" src="assets/imgs/nelson.png" />
     <ion-title>Registration</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="touchClose()">
@@ -34,7 +35,7 @@
       <div class="attention">A SMS text will be send to
         <span *ngIf="!data0.country || !data0.mobileNumber">the mobile number informed by you</span>
         <span *ngIf="data0.country && data0.mobileNumber" class="mobileNumberDesc">+{{data0.country.areaCode}}{{data0.mobileNumber.substring(0,1) === '0' ? data0.mobileNumber.substring(1) : data0.mobileNumber }}</span>
-        . This must be confirmed before
+        . Use 9999 to simulate it
         continue
       </div>
     </div>
@@ -55,20 +56,16 @@
 
       <form (ngSubmit)="submitFrm2()" #frm2="ngForm">
         <ion-item>
-          <ion-label floating class="labelOnWhiteForms">First Name</ion-label>
-          <ion-input type="text" [(ngModel)]="data2.firstName" name="email" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating class="labelOnWhiteForms">Last Name</ion-label>
-          <ion-input type="text" [(ngModel)]="data2.lastName" name="password" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+          <ion-label floating class="labelOnWhiteForms">Your Name</ion-label>
+          <ion-input type="text" [(ngModel)]="data2.name" name="myName" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating class="labelOnWhiteForms">Choose a password</ion-label>
-          <ion-input type="password" [(ngModel)]="data2.pass1" name="password" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+          <ion-input type="password" [(ngModel)]="data2.pass1" name="pass1" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label floating class="labelOnWhiteForms">Confirm your password</ion-label>
-          <ion-input type="password" [(ngModel)]="data2.pass2" name="password" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
+          <ion-input type="password" [(ngModel)]="data2.pass2" name="pass2" (ionFocus)="setLowerVisibility(false)" (ionBlur)="setLowerVisibility(true)" (keyup.enter)="keyboard.close();"></ion-input>
         </ion-item>
       </form>
     </div>
@@ -85,10 +82,10 @@
       <div class="canSkip">You can skip this for now, if you wish</div>
     </div>
     <div class="page lastPage" *ngIf="currentStep === 4" [ngClass]="{ showPage : showPage}">
-      <div class="toggleGroup">Select at least one service</div>
-        <ion-item *ngFor="let s of servicesForm ; let i = index">
+      <div class="toggleGroup">Favorite venues</div>
+        <ion-item *ngFor="let s of venuesForm ; let i = index">
           <ion-label><ion-icon color="appPrimary" name="information-circle" (click)="touchServiceInfo(s)"></ion-icon> {{s.name}}</ion-label>
-          <ion-toggle [(ngModel)]="servicesForm[i].inUse" color="appPrimary" name="privacy"></ion-toggle>
+          <ion-toggle [(ngModel)]="venuesForm[i].inUse" color="appPrimary" name="privacy"></ion-toggle>
         </ion-item>
         <div class="toggleGroup">Initial Privacy settings</div>
         <ion-item *ngFor="let p of privacyForm">

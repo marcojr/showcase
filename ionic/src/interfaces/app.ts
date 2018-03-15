@@ -1,7 +1,7 @@
 export interface App {
   countries : Country [],
   texts : Text ,
-  services : Service [],
+  venues : Venue [],
   privacyOptions : PrivacyOption []
 }
 
@@ -15,7 +15,7 @@ export interface Text {
   faq : string,
   tgc : string
 }
-export interface Service {
+export interface Venue {
   key: string,
   name: string,
   description : string,
@@ -31,9 +31,7 @@ export interface PrivacyOption {
 }
 export interface NameStructure {
   title : string,
-  first : string,
-  last : string,
-  displayName : string
+  name : string
 }
 export interface Address {
   streetLine1 : string,
@@ -47,7 +45,6 @@ export interface Address {
 }
 export interface DeviceInfo {
   platformName: string,
-  platformVersion: string,
   displayWidth: number,
   displayHeight: number
 }
@@ -55,38 +52,28 @@ export interface Session {
   token: string,
   expiration: Date
 }
-export interface Contact {
-  uuid: string,
-  username: string,
-  bio: string,
-  status: string,
-  isTest: boolean,
-  type: string,
-  circle?: string,
-  name: NameStructure,
-  followingAs?: string,
-  followedAs?: string
-}
 export interface ContactInfo {
   type: string,
   value: string,
   confirmed: boolean
 }
-export interface SocialCore {
-  name: string,
-  uuid: string,
-  users: Contact[]
-}
-export interface Count {
-  followings: number,
-  followers: number,
-  connections: ConnectionCount []
-}
-export interface ConnectionCount {
-  circle: string,
-  count: number
-}
-export interface PendingRequests {
-  connections: Contact[],
-  services: Service []
+export interface User {
+    type: string,
+    username:string,
+    uuid: string,
+    name: NameStructure,
+    bio: string,
+    registrationDate: Date,
+    status: string,
+    blockedUntil: Date,
+    requiresNewTosAcceptance : boolean,
+    gender: string,
+    birthDay: Date,
+    address: Address,
+    contactInfo: ContactInfo,
+    venues: string[],
+    customData: any,
+    privacyOptions : PrivacyOption [],
+    passwordMustBeChanged : boolean,
+    session : Session
 }

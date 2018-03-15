@@ -1,0 +1,1898 @@
+[
+  {
+    "type": "country",
+    "iso": "AF",
+    "name": "Afghanistan",
+    "areaCode": "93",
+    "population": 29121286,
+    "area": 647500
+  },
+  {
+    "type": "country",
+    "iso": "AL",
+    "name": "Albania",
+    "areaCode": "355",
+    "population": 2986952,
+    "area": 28748
+  },
+  {
+    "type": "country",
+    "iso": "DZ",
+    "name": "Algeria",
+    "areaCode": "213",
+    "population": 34586184,
+    "area": 2381740
+  },
+  {
+    "type": "country",
+    "iso": "AS",
+    "name": "American Samoa",
+    "areaCode": "1-684",
+    "population": 57881,
+    "area": 199
+  },
+  {
+    "type": "country",
+    "iso": "AD",
+    "name": "Andorra",
+    "areaCode": "376",
+    "population": 84000,
+    "area": 468
+  },
+  {
+    "type": "country",
+    "iso": "AO",
+    "name": "Angola",
+    "areaCode": "244",
+    "population": 13068161,
+    "area": 1246700
+  },
+  {
+    "type": "country",
+    "iso": "AI",
+    "name": "Anguilla",
+    "areaCode": "1-264",
+    "population": 13254,
+    "area": 102
+  },
+  {
+    "type": "country",
+    "iso": "AQ",
+    "name": "Antarctica",
+    "areaCode": "672",
+    "population": 0,
+    "area": 14000000
+  },
+  {
+    "type": "country",
+    "iso": "AG",
+    "name": "Antigua and Barbuda",
+    "areaCode": "1-268",
+    "population": 86754,
+    "area": 443
+  },
+  {
+    "type": "country",
+    "iso": "AR",
+    "name": "Argentina",
+    "areaCode": "54",
+    "population": 41343201,
+    "area": 2766890
+  },
+  {
+    "type": "country",
+    "iso": "AM",
+    "name": "Armenia",
+    "areaCode": "374",
+    "population": 2968000,
+    "area": 29800
+  },
+  {
+    "type": "country",
+    "iso": "AW",
+    "name": "Aruba",
+    "areaCode": "297",
+    "population": 71566,
+    "area": 193
+  },
+  {
+    "type": "country",
+    "iso": "AU",
+    "name": "Australia",
+    "areaCode": "61",
+    "population": 21515754,
+    "area": 7686850
+  },
+  {
+    "type": "country",
+    "iso": "AT",
+    "name": "Austria",
+    "areaCode": "43",
+    "population": 8205000,
+    "area": 83858
+  },
+  {
+    "type": "country",
+    "iso": "AZ",
+    "name": "Azerbaijan",
+    "areaCode": "994",
+    "population": 8303512,
+    "area": 86600
+  },
+  {
+    "type": "country",
+    "iso": "BS",
+    "name": "Bahamas",
+    "areaCode": "1-242",
+    "population": 301790,
+    "area": 13940
+  },
+  {
+    "type": "country",
+    "iso": "BH",
+    "name": "Bahrain",
+    "areaCode": "973",
+    "population": 738004,
+    "area": 665
+  },
+  {
+    "type": "country",
+    "iso": "BD",
+    "name": "Bangladesh",
+    "areaCode": "880",
+    "population": 156118464,
+    "area": 144000
+  },
+  {
+    "type": "country",
+    "iso": "BB",
+    "name": "Barbados",
+    "areaCode": "1-246",
+    "population": 285653,
+    "area": 431
+  },
+  {
+    "type": "country",
+    "iso": "BY",
+    "name": "Belarus",
+    "areaCode": "375",
+    "population": 9685000,
+    "area": 207600
+  },
+  {
+    "type": "country",
+    "iso": "BE",
+    "name": "Belgium",
+    "areaCode": "32",
+    "population": 10403000,
+    "area": 30510
+  },
+  {
+    "type": "country",
+    "iso": "BZ",
+    "name": "Belize",
+    "areaCode": "501",
+    "population": 314522,
+    "area": 22966
+  },
+  {
+    "type": "country",
+    "iso": "BJ",
+    "name": "Benin",
+    "areaCode": "229",
+    "population": 9056010,
+    "area": 112620
+  },
+  {
+    "type": "country",
+    "iso": "BM",
+    "name": "Bermuda",
+    "areaCode": "1-441",
+    "population": 65365,
+    "area": 53
+  },
+  {
+    "type": "country",
+    "iso": "BT",
+    "name": "Bhutan",
+    "areaCode": "975",
+    "population": 699847,
+    "area": 47000
+  },
+  {
+    "type": "country",
+    "iso": "BO",
+    "name": "Bolivia",
+    "areaCode": "591",
+    "population": 9947418,
+    "area": 1098580
+  },
+  {
+    "type": "country",
+    "iso": "BA",
+    "name": "Bosnia and Herzegovina",
+    "areaCode": "387",
+    "population": 4590000,
+    "area": 51129
+  },
+  {
+    "type": "country",
+    "iso": "BW",
+    "name": "Botswana",
+    "areaCode": "267",
+    "population": 2029307,
+    "area": 600370
+  },
+  {
+    "type": "country",
+    "iso": "BR",
+    "name": "Brazil",
+    "areaCode": "55",
+    "population": 201103330,
+    "area": 8511965
+  },
+  {
+    "type": "country",
+    "iso": "IO",
+    "name": "British Indian Ocean Territory",
+    "areaCode": "246",
+    "population": 4000,
+    "area": 60
+  },
+  {
+    "type": "country",
+    "iso": "VG",
+    "name": "British Virgin Islands",
+    "areaCode": "1-284",
+    "population": 21730,
+    "area": 153
+  },
+  {
+    "type": "country",
+    "iso": "BN",
+    "name": "Brunei",
+    "areaCode": "673",
+    "population": 395027,
+    "area": 5770
+  },
+  {
+    "type": "country",
+    "iso": "CA",
+    "name": "Canada",
+    "areaCode": "1",
+    "population": 33679000,
+    "area": 9984670
+  },
+  {
+    "type": "country",
+    "iso": "BG",
+    "name": "Bulgaria",
+    "areaCode": "359",
+    "population": 7148785,
+    "area": 110910
+  },
+  {
+    "type": "country",
+    "iso": "BF",
+    "name": "Burkina Faso",
+    "areaCode": "226",
+    "population": 16241811,
+    "area": 274200
+  },
+  {
+    "type": "country",
+    "iso": "BI",
+    "name": "Burundi",
+    "areaCode": "257",
+    "population": 9863117,
+    "area": 27830
+  },
+  {
+    "type": "country",
+    "iso": "KH",
+    "name": "Cambodia",
+    "areaCode": "855",
+    "population": 14453680,
+    "area": 181040
+  },
+  {
+    "type": "country",
+    "iso": "CM",
+    "name": "Cameroon",
+    "areaCode": "237",
+    "population": 19294149,
+    "area": 475440
+  },
+  {
+    "type": "country",
+    "iso": "CV",
+    "name": "Cape Verde",
+    "areaCode": "238",
+    "population": 508659,
+    "area": 4033
+  },
+  {
+    "type": "country",
+    "iso": "KY",
+    "name": "Cayman Islands",
+    "areaCode": "1-345",
+    "population": 44270,
+    "area": 262
+  },
+  {
+    "type": "country",
+    "iso": "CF",
+    "name": "Central African Republic",
+    "areaCode": "236",
+    "population": 4844927,
+    "area": 622984
+  },
+  {
+    "type": "country",
+    "iso": "TD",
+    "name": "Chad",
+    "areaCode": "235",
+    "population": 10543464,
+    "area": 1284000
+  },
+  {
+    "type": "country",
+    "iso": "CL",
+    "name": "Chile",
+    "areaCode": "56",
+    "population": 16746491,
+    "area": 756950
+  },
+  {
+    "type": "country",
+    "iso": "CN",
+    "name": "China",
+    "areaCode": "86",
+    "population": 1330044000,
+    "area": 9596960
+  },
+  {
+    "type": "country",
+    "iso": "CX",
+    "name": "Christmas Island",
+    "areaCode": "61",
+    "population": 1500,
+    "area": 135
+  },
+  {
+    "type": "country",
+    "iso": "CC",
+    "name": "Cocos Islands",
+    "areaCode": "61",
+    "population": 628,
+    "area": 14
+  },
+  {
+    "type": "country",
+    "iso": "CO",
+    "name": "Colombia",
+    "areaCode": "57",
+    "population": 47790000,
+    "area": 1138910
+  },
+  {
+    "type": "country",
+    "iso": "KM",
+    "name": "Comoros",
+    "areaCode": "269",
+    "population": 773407,
+    "area": 2170
+  },
+  {
+    "type": "country",
+    "iso": "CK",
+    "name": "Cook Islands",
+    "areaCode": "682",
+    "population": 21388,
+    "area": 240
+  },
+  {
+    "type": "country",
+    "iso": "CR",
+    "name": "Costa Rica",
+    "areaCode": "506",
+    "population": 4516220,
+    "area": 51100
+  },
+  {
+    "type": "country",
+    "iso": "HR",
+    "name": "Croatia",
+    "areaCode": "385",
+    "population": 4491000,
+    "area": 56542
+  },
+  {
+    "type": "country",
+    "iso": "CU",
+    "name": "Cuba",
+    "areaCode": "53",
+    "population": 11423000,
+    "area": 110860
+  },
+  {
+    "type": "country",
+    "iso": "CW",
+    "name": "Curacao",
+    "areaCode": "599",
+    "population": 141766,
+    "area": 444
+  },
+  {
+    "type": "country",
+    "iso": "CY",
+    "name": "Cyprus",
+    "areaCode": "357",
+    "population": 1102677,
+    "area": 9250
+  },
+  {
+    "type": "country",
+    "iso": "CZ",
+    "name": "Czech Republic",
+    "areaCode": "420",
+    "population": 10476000,
+    "area": 78866
+  },
+  {
+    "type": "country",
+    "iso": "CD",
+    "name": "Democratic Republic of the Congo",
+    "areaCode": "243",
+    "population": 70916439,
+    "area": 2345410
+  },
+  {
+    "type": "country",
+    "iso": "DK",
+    "name": "Denmark",
+    "areaCode": "45",
+    "population": 5484000,
+    "area": 43094
+  },
+  {
+    "type": "country",
+    "iso": "DJ",
+    "name": "Djibouti",
+    "areaCode": "253",
+    "population": 740528,
+    "area": 23000
+  },
+  {
+    "type": "country",
+    "iso": "DM",
+    "name": "Dominica",
+    "areaCode": "1-767",
+    "population": 72813,
+    "area": 754
+  },
+  {
+    "type": "country",
+    "iso": "DO",
+    "name": "Dominican Republic",
+    "areaCode": "1-809 1-829 1-849",
+    "population": 9823821,
+    "area": 48730
+  },
+  {
+    "type": "country",
+    "iso": "TL",
+    "name": "East Timor",
+    "areaCode": "670",
+    "population": 1154625,
+    "area": 15007
+  },
+  {
+    "type": "country",
+    "iso": "EC",
+    "name": "Ecuador",
+    "areaCode": "593",
+    "population": 14790608,
+    "area": 283560
+  },
+  {
+    "type": "country",
+    "iso": "EG",
+    "name": "Egypt",
+    "areaCode": "20",
+    "population": 80471869,
+    "area": 1001450
+  },
+  {
+    "type": "country",
+    "iso": "SV",
+    "name": "El Salvador",
+    "areaCode": "503",
+    "population": 6052064,
+    "area": 21040
+  },
+  {
+    "type": "country",
+    "iso": "GQ",
+    "name": "Equatorial Guinea",
+    "areaCode": "240",
+    "population": 1014999,
+    "area": 28051
+  },
+  {
+    "type": "country",
+    "iso": "ER",
+    "name": "Eritrea",
+    "areaCode": "291",
+    "population": 5792984,
+    "area": 121320
+  },
+  {
+    "type": "country",
+    "iso": "EE",
+    "name": "Estonia",
+    "areaCode": "372",
+    "population": 1291170,
+    "area": 45226
+  },
+  {
+    "type": "country",
+    "iso": "ET",
+    "name": "Ethiopia",
+    "areaCode": "251",
+    "population": 88013491,
+    "area": 1127127
+  },
+  {
+    "type": "country",
+    "iso": "FK",
+    "name": "Falkland Islands",
+    "areaCode": "500",
+    "population": 2638,
+    "area": 12173
+  },
+  {
+    "type": "country",
+    "iso": "FO",
+    "name": "Faroe Islands",
+    "areaCode": "298",
+    "population": 48228,
+    "area": 1399
+  },
+  {
+    "type": "country",
+    "iso": "FJ",
+    "name": "Fiji",
+    "areaCode": "679",
+    "population": 875983,
+    "area": 18270
+  },
+  {
+    "type": "country",
+    "iso": "FI",
+    "name": "Finland",
+    "areaCode": "358",
+    "population": 5244000,
+    "area": 337030
+  },
+  {
+    "type": "country",
+    "iso": "FR",
+    "name": "France",
+    "areaCode": "33",
+    "population": 64768389,
+    "area": 547030
+  },
+  {
+    "type": "country",
+    "iso": "PF",
+    "name": "French Polynesia",
+    "areaCode": "689",
+    "population": 270485,
+    "area": 4167
+  },
+  {
+    "type": "country",
+    "iso": "GA",
+    "name": "Gabon",
+    "areaCode": "241",
+    "population": 1545255,
+    "area": 267667
+  },
+  {
+    "type": "country",
+    "iso": "GM",
+    "name": "Gambia",
+    "areaCode": "220",
+    "population": 1593256,
+    "area": 11300
+  },
+  {
+    "type": "country",
+    "iso": "GE",
+    "name": "Georgia",
+    "areaCode": "995",
+    "population": 4630000,
+    "area": 69700
+  },
+  {
+    "type": "country",
+    "iso": "DE",
+    "name": "Germany",
+    "areaCode": "49",
+    "population": 81802257,
+    "area": 357021
+  },
+  {
+    "type": "country",
+    "iso": "GH",
+    "name": "Ghana",
+    "areaCode": "233",
+    "population": 24339838,
+    "area": 239460
+  },
+  {
+    "type": "country",
+    "iso": "GI",
+    "name": "Gibraltar",
+    "areaCode": "350",
+    "population": 27884,
+    "area": 7
+  },
+  {
+    "type": "country",
+    "iso": "GR",
+    "name": "Greece",
+    "areaCode": "30",
+    "population": 11000000,
+    "area": 131940
+  },
+  {
+    "type": "country",
+    "iso": "GL",
+    "name": "Greenland",
+    "areaCode": "299",
+    "population": 56375,
+    "area": 2166086
+  },
+  {
+    "type": "country",
+    "iso": "GD",
+    "name": "Grenada",
+    "areaCode": "1-473",
+    "population": 107818,
+    "area": 344
+  },
+  {
+    "type": "country",
+    "iso": "GU",
+    "name": "Guam",
+    "areaCode": "1-671",
+    "population": 159358,
+    "area": 549
+  },
+  {
+    "type": "country",
+    "iso": "GT",
+    "name": "Guatemala",
+    "areaCode": "502",
+    "population": 13550440,
+    "area": 108890
+  },
+  {
+    "type": "country",
+    "iso": "GG",
+    "name": "Guernsey",
+    "areaCode": "44-1481",
+    "population": 65228,
+    "area": 78
+  },
+  {
+    "type": "country",
+    "iso": "GN",
+    "name": "Guinea",
+    "areaCode": "224",
+    "population": 10324025,
+    "area": 245857
+  },
+  {
+    "type": "country",
+    "iso": "GW",
+    "name": "Guinea-Bissau",
+    "areaCode": "245",
+    "population": 1565126,
+    "area": 36120
+  },
+  {
+    "type": "country",
+    "iso": "GY",
+    "name": "Guyana",
+    "areaCode": "592",
+    "population": 748486,
+    "area": 214970
+  },
+  {
+    "type": "country",
+    "iso": "HT",
+    "name": "Haiti",
+    "areaCode": "509",
+    "population": 9648924,
+    "area": 27750
+  },
+  {
+    "type": "country",
+    "iso": "HN",
+    "name": "Honduras",
+    "areaCode": "504",
+    "population": 7989415,
+    "area": 112090
+  },
+  {
+    "type": "country",
+    "iso": "HK",
+    "name": "Hong Kong",
+    "areaCode": "852",
+    "population": 6898686,
+    "area": 1092
+  },
+  {
+    "type": "country",
+    "iso": "HU",
+    "name": "Hungary",
+    "areaCode": "36",
+    "population": 9982000,
+    "area": 93030
+  },
+  {
+    "type": "country",
+    "iso": "IS",
+    "name": "Iceland",
+    "areaCode": "354",
+    "population": 308910,
+    "area": 103000
+  },
+  {
+    "type": "country",
+    "iso": "IN",
+    "name": "India",
+    "areaCode": "91",
+    "population": 1173108018,
+    "area": 3287590
+  },
+  {
+    "type": "country",
+    "iso": "ID",
+    "name": "Indonesia",
+    "areaCode": "62",
+    "population": 242968342,
+    "area": 1919440
+  },
+  {
+    "type": "country",
+    "iso": "IR",
+    "name": "Iran",
+    "areaCode": "98",
+    "population": 76923300,
+    "area": 1648000
+  },
+  {
+    "type": "country",
+    "iso": "IQ",
+    "name": "Iraq",
+    "areaCode": "964",
+    "population": 29671605,
+    "area": 437072
+  },
+  {
+    "type": "country",
+    "iso": "IE",
+    "name": "Ireland",
+    "areaCode": "353",
+    "population": 4622917,
+    "area": 70280
+  },
+  {
+    "type": "country",
+    "iso": "IM",
+    "name": "Isle of Man",
+    "areaCode": "44-1624",
+    "population": 75049,
+    "area": 572
+  },
+  {
+    "type": "country",
+    "iso": "IL",
+    "name": "Israel",
+    "areaCode": "972",
+    "population": 7353985,
+    "area": 20770
+  },
+  {
+    "type": "country",
+    "iso": "IT",
+    "name": "Italy",
+    "areaCode": "39",
+    "population": 60340328,
+    "area": 301230
+  },
+  {
+    "type": "country",
+    "iso": "CI",
+    "name": "Ivory Coast",
+    "areaCode": "225",
+    "population": 21058798,
+    "area": 322460
+  },
+  {
+    "type": "country",
+    "iso": "JM",
+    "name": "Jamaica",
+    "areaCode": "1-876",
+    "population": 2847232,
+    "area": 10991
+  },
+  {
+    "type": "country",
+    "iso": "JP",
+    "name": "Japan",
+    "areaCode": "81",
+    "population": 127288000,
+    "area": 377835
+  },
+  {
+    "type": "country",
+    "iso": "JE",
+    "name": "Jersey",
+    "areaCode": "44-1534",
+    "population": 90812,
+    "area": 116
+  },
+  {
+    "type": "country",
+    "iso": "JO",
+    "name": "Jordan",
+    "areaCode": "962",
+    "population": 6407085,
+    "area": 92300
+  },
+  {
+    "type": "country",
+    "iso": "KZ",
+    "name": "Kazakhstan",
+    "areaCode": "7",
+    "population": 15340000,
+    "area": 2717300
+  },
+  {
+    "type": "country",
+    "iso": "KE",
+    "name": "Kenya",
+    "areaCode": "254",
+    "population": 40046566,
+    "area": 582650
+  },
+  {
+    "type": "country",
+    "iso": "KI",
+    "name": "Kiribati",
+    "areaCode": "686",
+    "population": 92533,
+    "area": 811
+  },
+  {
+    "type": "country",
+    "iso": "KW",
+    "name": "Kuwait",
+    "areaCode": "965",
+    "population": 2789132,
+    "area": 17820
+  },
+  {
+    "type": "country",
+    "iso": "KG",
+    "name": "Kyrgyzstan",
+    "areaCode": "996",
+    "population": 5508626,
+    "area": 198500
+  },
+  {
+    "type": "country",
+    "iso": "LA",
+    "name": "Laos",
+    "areaCode": "856",
+    "population": 6368162,
+    "area": 236800
+  },
+  {
+    "type": "country",
+    "iso": "LV",
+    "name": "Latvia",
+    "areaCode": "371",
+    "population": 2217969,
+    "area": 64589
+  },
+  {
+    "type": "country",
+    "iso": "LB",
+    "name": "Lebanon",
+    "areaCode": "961",
+    "population": 4125247,
+    "area": 10400
+  },
+  {
+    "type": "country",
+    "iso": "LS",
+    "name": "Lesotho",
+    "areaCode": "266",
+    "population": 1919552,
+    "area": 30355
+  },
+  {
+    "type": "country",
+    "iso": "LR",
+    "name": "Liberia",
+    "areaCode": "231",
+    "population": 3685076,
+    "area": 111370
+  },
+  {
+    "type": "country",
+    "iso": "LY",
+    "name": "Libya",
+    "areaCode": "218",
+    "population": 6461454,
+    "area": 1759540
+  },
+  {
+    "type": "country",
+    "iso": "LI",
+    "name": "Liechtenstein",
+    "areaCode": "423",
+    "population": 35000,
+    "area": 160
+  },
+  {
+    "type": "country",
+    "iso": "LT",
+    "name": "Lithuania",
+    "areaCode": "370",
+    "population": 2944459,
+    "area": 65200
+  },
+  {
+    "type": "country",
+    "iso": "LU",
+    "name": "Luxembourg",
+    "areaCode": "352",
+    "population": 497538,
+    "area": 2586
+  },
+  {
+    "type": "country",
+    "iso": "MO",
+    "name": "Macao",
+    "areaCode": "853",
+    "population": 449198,
+    "area": 254
+  },
+  {
+    "type": "country",
+    "iso": "MK",
+    "name": "Macedonia",
+    "areaCode": "389",
+    "population": 2062294,
+    "area": 25333
+  },
+  {
+    "type": "country",
+    "iso": "MG",
+    "name": "Madagascar",
+    "areaCode": "261",
+    "population": 21281844,
+    "area": 587040
+  },
+  {
+    "type": "country",
+    "iso": "MW",
+    "name": "Malawi",
+    "areaCode": "265",
+    "population": 15447500,
+    "area": 118480
+  },
+  {
+    "type": "country",
+    "iso": "MY",
+    "name": "Malaysia",
+    "areaCode": "60",
+    "population": 28274729,
+    "area": 329750
+  },
+  {
+    "type": "country",
+    "iso": "MV",
+    "name": "Maldives",
+    "areaCode": "960",
+    "population": 395650,
+    "area": 300
+  },
+  {
+    "type": "country",
+    "iso": "ML",
+    "name": "Mali",
+    "areaCode": "223",
+    "population": 13796354,
+    "area": 1240000
+  },
+  {
+    "type": "country",
+    "iso": "MT",
+    "name": "Malta",
+    "areaCode": "356",
+    "population": 403000,
+    "area": 316
+  },
+  {
+    "type": "country",
+    "iso": "MH",
+    "name": "Marshall Islands",
+    "areaCode": "692",
+    "population": 65859,
+    "area": 181
+  },
+  {
+    "type": "country",
+    "iso": "MR",
+    "name": "Mauritania",
+    "areaCode": "222",
+    "population": 3205060,
+    "area": 1030700
+  },
+  {
+    "type": "country",
+    "iso": "MU",
+    "name": "Mauritius",
+    "areaCode": "230",
+    "population": 1294104,
+    "area": 2040
+  },
+  {
+    "type": "country",
+    "iso": "YT",
+    "name": "Mayotte",
+    "areaCode": "262",
+    "population": 159042,
+    "area": 374
+  },
+  {
+    "type": "country",
+    "iso": "MX",
+    "name": "Mexico",
+    "areaCode": "52",
+    "population": 112468855,
+    "area": 1972550
+  },
+  {
+    "type": "country",
+    "iso": "FM",
+    "name": "Micronesia",
+    "areaCode": "691",
+    "population": 107708,
+    "area": 702
+  },
+  {
+    "type": "country",
+    "iso": "MD",
+    "name": "Moldova",
+    "areaCode": "373",
+    "population": 4324000,
+    "area": 33843
+  },
+  {
+    "type": "country",
+    "iso": "MC",
+    "name": "Monaco",
+    "areaCode": "377",
+    "population": 32965,
+    "area": 2
+  },
+  {
+    "type": "country",
+    "iso": "MN",
+    "name": "Mongolia",
+    "areaCode": "976",
+    "population": 3086918,
+    "area": 1565000
+  },
+  {
+    "type": "country",
+    "iso": "ME",
+    "name": "Montenegro",
+    "areaCode": "382",
+    "population": 666730,
+    "area": 14026
+  },
+  {
+    "type": "country",
+    "iso": "MS",
+    "name": "Montserrat",
+    "areaCode": "1-664",
+    "population": 9341,
+    "area": 102
+  },
+  {
+    "type": "country",
+    "iso": "MA",
+    "name": "Morocco",
+    "areaCode": "212",
+    "population": 31627428,
+    "area": 446550
+  },
+  {
+    "type": "country",
+    "iso": "MZ",
+    "name": "Mozambique",
+    "areaCode": "258",
+    "population": 22061451,
+    "area": 801590
+  },
+  {
+    "type": "country",
+    "iso": "MM",
+    "name": "Myanmar",
+    "areaCode": "95",
+    "population": 53414374,
+    "area": 678500
+  },
+  {
+    "type": "country",
+    "iso": "NA",
+    "name": "Namibia",
+    "areaCode": "264",
+    "population": 2128471,
+    "area": 825418
+  },
+  {
+    "type": "country",
+    "iso": "NR",
+    "name": "Nauru",
+    "areaCode": "674",
+    "population": 10065,
+    "area": 21
+  },
+  {
+    "type": "country",
+    "iso": "NP",
+    "name": "Nepal",
+    "areaCode": "977",
+    "population": 28951852,
+    "area": 140800
+  },
+  {
+    "type": "country",
+    "iso": "NL",
+    "name": "Netherlands",
+    "areaCode": "31",
+    "population": 16645000,
+    "area": 41526
+  },
+  {
+    "type": "country",
+    "iso": "AN",
+    "name": "Netherlands Antilles",
+    "areaCode": "599",
+    "population": 136197,
+    "area": 960
+  },
+  {
+    "type": "country",
+    "iso": "NC",
+    "name": "New Caledonia",
+    "areaCode": "687",
+    "population": 216494,
+    "area": 19060
+  },
+  {
+    "type": "country",
+    "iso": "NZ",
+    "name": "New Zealand",
+    "areaCode": "64",
+    "population": 4252277,
+    "area": 268680
+  },
+  {
+    "type": "country",
+    "iso": "NI",
+    "name": "Nicaragua",
+    "areaCode": "505",
+    "population": 5995928,
+    "area": 129494
+  },
+  {
+    "type": "country",
+    "iso": "NE",
+    "name": "Niger",
+    "areaCode": "227",
+    "population": 15878271,
+    "area": 1267000
+  },
+  {
+    "type": "country",
+    "iso": "NG",
+    "name": "Nigeria",
+    "areaCode": "234",
+    "population": 154000000,
+    "area": 923768
+  },
+  {
+    "type": "country",
+    "iso": "NU",
+    "name": "Niue",
+    "areaCode": "683",
+    "population": 2166,
+    "area": 260
+  },
+  {
+    "type": "country",
+    "iso": "KP",
+    "name": "North Korea",
+    "areaCode": "850",
+    "population": 22912177,
+    "area": 120540
+  },
+  {
+    "type": "country",
+    "iso": "MP",
+    "name": "Northern Mariana Islands",
+    "areaCode": "1-670",
+    "population": 53883,
+    "area": 477
+  },
+  {
+    "type": "country",
+    "iso": "NO",
+    "name": "Norway",
+    "areaCode": "47",
+    "population": 5009150,
+    "area": 324220
+  },
+  {
+    "type": "country",
+    "iso": "OM",
+    "name": "Oman",
+    "areaCode": "968",
+    "population": 2967717,
+    "area": 212460
+  },
+  {
+    "type": "country",
+    "iso": "PK",
+    "name": "Pakistan",
+    "areaCode": "92",
+    "population": 184404791,
+    "area": 803940
+  },
+  {
+    "type": "country",
+    "iso": "PW",
+    "name": "Palau",
+    "areaCode": "680",
+    "population": 19907,
+    "area": 458
+  },
+  {
+    "type": "country",
+    "iso": "PA",
+    "name": "Panama",
+    "areaCode": "507",
+    "population": 3410676,
+    "area": 78200
+  },
+  {
+    "type": "country",
+    "iso": "PG",
+    "name": "Papua New Guinea",
+    "areaCode": "675",
+    "population": 6064515,
+    "area": 462840
+  },
+  {
+    "type": "country",
+    "iso": "PY",
+    "name": "Paraguay",
+    "areaCode": "595",
+    "population": 6375830,
+    "area": 406750
+  },
+  {
+    "type": "country",
+    "iso": "PE",
+    "name": "Peru",
+    "areaCode": "51",
+    "population": 29907003,
+    "area": 1285220
+  },
+  {
+    "type": "country",
+    "iso": "PH",
+    "name": "Philippines",
+    "areaCode": "63",
+    "population": 99900177,
+    "area": 300000
+  },
+  {
+    "type": "country",
+    "iso": "PN",
+    "name": "Pitcairn",
+    "areaCode": "64",
+    "population": 46,
+    "area": 47
+  },
+  {
+    "type": "country",
+    "iso": "PL",
+    "name": "Poland",
+    "areaCode": "48",
+    "population": 38500000,
+    "area": 312685
+  },
+  {
+    "type": "country",
+    "iso": "PT",
+    "name": "Portugal",
+    "areaCode": "351",
+    "population": 10676000,
+    "area": 92391
+  },
+  {
+    "type": "country",
+    "iso": "PR",
+    "name": "Puerto Rico",
+    "areaCode": "1-787 1-939",
+    "population": 3916632,
+    "area": 9104
+  },
+  {
+    "type": "country",
+    "iso": "QA",
+    "name": "Qatar",
+    "areaCode": "974",
+    "population": 840926,
+    "area": 11437
+  },
+  {
+    "type": "country",
+    "iso": "CG",
+    "name": "Republic of the Congo",
+    "areaCode": "242",
+    "population": 3039126,
+    "area": 342000
+  },
+  {
+    "type": "country",
+    "iso": "RE",
+    "name": "Reunion",
+    "areaCode": "262",
+    "population": 776948,
+    "area": 2517
+  },
+  {
+    "type": "country",
+    "iso": "RO",
+    "name": "Romania",
+    "areaCode": "40",
+    "population": 21959278,
+    "area": 237500
+  },
+  {
+    "type": "country",
+    "iso": "RU",
+    "name": "Russia",
+    "areaCode": "7",
+    "population": 140702000,
+    "area": 17100000
+  },
+  {
+    "type": "country",
+    "iso": "RW",
+    "name": "Rwanda",
+    "areaCode": "250",
+    "population": 11055976,
+    "area": 26338
+  },
+  {
+    "type": "country",
+    "iso": "BL",
+    "name": "Saint Barthelemy",
+    "areaCode": "590",
+    "population": 8450,
+    "area": 21
+  },
+  {
+    "type": "country",
+    "iso": "SH",
+    "name": "Saint Helena",
+    "areaCode": "290",
+    "population": 7460,
+    "area": 410
+  },
+  {
+    "type": "country",
+    "iso": "KN",
+    "name": "Saint Kitts and Nevis",
+    "areaCode": "1-869",
+    "population": 51134,
+    "area": 261
+  },
+  {
+    "type": "country",
+    "iso": "LC",
+    "name": "Saint Lucia",
+    "areaCode": "1-758",
+    "population": 160922,
+    "area": 616
+  },
+  {
+    "type": "country",
+    "iso": "MF",
+    "name": "Saint Martin",
+    "areaCode": "590",
+    "population": 35925,
+    "area": 53
+  },
+  {
+    "type": "country",
+    "iso": "PM",
+    "name": "Saint Pierre and Miquelon",
+    "areaCode": "508",
+    "population": 7012,
+    "area": 242
+  },
+  {
+    "type": "country",
+    "iso": "VC",
+    "name": "Saint Vincent and the Grenadines",
+    "areaCode": "1-784",
+    "population": 104217,
+    "area": 389
+  },
+  {
+    "type": "country",
+    "iso": "WS",
+    "name": "Samoa",
+    "areaCode": "685",
+    "population": 192001,
+    "area": 2944
+  },
+  {
+    "type": "country",
+    "iso": "SM",
+    "name": "San Marino",
+    "areaCode": "378",
+    "population": 31477,
+    "area": 61
+  },
+  {
+    "type": "country",
+    "iso": "ST",
+    "name": "Sao Tome and Principe",
+    "areaCode": "239",
+    "population": 175808,
+    "area": 1001
+  },
+  {
+    "type": "country",
+    "iso": "SA",
+    "name": "Saudi Arabia",
+    "areaCode": "966",
+    "population": 25731776,
+    "area": 1960582
+  },
+  {
+    "type": "country",
+    "iso": "SN",
+    "name": "Senegal",
+    "areaCode": "221",
+    "population": 12323252,
+    "area": 196190
+  },
+  {
+    "type": "country",
+    "iso": "RS",
+    "name": "Serbia",
+    "areaCode": "381",
+    "population": 7344847,
+    "area": 88361
+  },
+  {
+    "type": "country",
+    "iso": "SC",
+    "name": "Seychelles",
+    "areaCode": "248",
+    "population": 88340,
+    "area": 455
+  },
+  {
+    "type": "country",
+    "iso": "SL",
+    "name": "Sierra Leone",
+    "areaCode": "232",
+    "population": 5245695,
+    "area": 71740
+  },
+  {
+    "type": "country",
+    "iso": "SG",
+    "name": "Singapore",
+    "areaCode": "65",
+    "population": 4701069,
+    "area": 693
+  },
+  {
+    "type": "country",
+    "iso": "SX",
+    "name": "Sint Maarten",
+    "areaCode": "1-721",
+    "population": 37429,
+    "area": 34
+  },
+  {
+    "type": "country",
+    "iso": "SK",
+    "name": "Slovakia",
+    "areaCode": "421",
+    "population": 5455000,
+    "area": 48845
+  },
+  {
+    "type": "country",
+    "iso": "SI",
+    "name": "Slovenia",
+    "areaCode": "386",
+    "population": 2007000,
+    "area": 20273
+  },
+  {
+    "type": "country",
+    "iso": "SB",
+    "name": "Solomon Islands",
+    "areaCode": "677",
+    "population": 559198,
+    "area": 28450
+  },
+  {
+    "type": "country",
+    "iso": "SO",
+    "name": "Somalia",
+    "areaCode": "252",
+    "population": 10112453,
+    "area": 637657
+  },
+  {
+    "type": "country",
+    "iso": "ZA",
+    "name": "South Africa",
+    "areaCode": "27",
+    "population": 49000000,
+    "area": 1219912
+  },
+  {
+    "type": "country",
+    "iso": "KR",
+    "name": "South Korea",
+    "areaCode": "82",
+    "population": 48422644,
+    "area": 98480
+  },
+  {
+    "type": "country",
+    "iso": "ES",
+    "name": "Spain",
+    "areaCode": "34",
+    "population": 46505963,
+    "area": 504782
+  },
+  {
+    "type": "country",
+    "iso": "LK",
+    "name": "Sri Lanka",
+    "areaCode": "94",
+    "population": 21513990,
+    "area": 65610
+  },
+  {
+    "type": "country",
+    "iso": "SD",
+    "name": "Sudan",
+    "areaCode": "249",
+    "population": 35000000,
+    "area": 1861484
+  },
+  {
+    "type": "country",
+    "iso": "SR",
+    "name": "Suriname",
+    "areaCode": "597",
+    "population": 492829,
+    "area": 163270
+  },
+  {
+    "type": "country",
+    "iso": "SJ",
+    "name": "Svalbard and Jan Mayen",
+    "areaCode": "47",
+    "population": 2550,
+    "area": 62049
+  },
+  {
+    "type": "country",
+    "iso": "SZ",
+    "name": "Swaziland",
+    "areaCode": "268",
+    "population": 1354051,
+    "area": 17363
+  },
+  {
+    "type": "country",
+    "iso": "SE",
+    "name": "Sweden",
+    "areaCode": "46",
+    "population": 9555893,
+    "area": 449964
+  },
+  {
+    "type": "country",
+    "iso": "CH",
+    "name": "Switzerland",
+    "areaCode": "41",
+    "population": 7581000,
+    "area": 41290
+  },
+  {
+    "type": "country",
+    "iso": "SY",
+    "name": "Syria",
+    "areaCode": "963",
+    "population": 22198110,
+    "area": 185180
+  },
+  {
+    "type": "country",
+    "iso": "TW",
+    "name": "Taiwan",
+    "areaCode": "886",
+    "population": 22894384,
+    "area": 35980
+  },
+  {
+    "type": "country",
+    "iso": "TJ",
+    "name": "Tajikistan",
+    "areaCode": "992",
+    "population": 7487489,
+    "area": 143100
+  },
+  {
+    "type": "country",
+    "iso": "TZ",
+    "name": "Tanzania",
+    "areaCode": "255",
+    "population": 41892895,
+    "area": 945087
+  },
+  {
+    "type": "country",
+    "iso": "TH",
+    "name": "Thailand",
+    "areaCode": "66",
+    "population": 67089500,
+    "area": 514000
+  },
+  {
+    "type": "country",
+    "iso": "TG",
+    "name": "Togo",
+    "areaCode": "228",
+    "population": 6587239,
+    "area": 56785
+  },
+  {
+    "type": "country",
+    "iso": "TK",
+    "name": "Tokelau",
+    "areaCode": "690",
+    "population": 1466,
+    "area": 10
+  },
+  {
+    "type": "country",
+    "iso": "TO",
+    "name": "Tonga",
+    "areaCode": "676",
+    "population": 122580,
+    "area": 748
+  },
+  {
+    "type": "country",
+    "iso": "TT",
+    "name": "Trinidad and Tobago",
+    "areaCode": "1-868",
+    "population": 1228691,
+    "area": 5128
+  },
+  {
+    "type": "country",
+    "iso": "TN",
+    "name": "Tunisia",
+    "areaCode": "216",
+    "population": 10589025,
+    "area": 163610
+  },
+  {
+    "type": "country",
+    "iso": "TR",
+    "name": "Turkey",
+    "areaCode": "90",
+    "population": 77804122,
+    "area": 780580
+  },
+  {
+    "type": "country",
+    "iso": "TM",
+    "name": "Turkmenistan",
+    "areaCode": "993",
+    "population": 4940916,
+    "area": 488100
+  },
+  {
+    "type": "country",
+    "iso": "TC",
+    "name": "Turks and Caicos Islands",
+    "areaCode": "1-649",
+    "population": 20556,
+    "area": 430
+  },
+  {
+    "type": "country",
+    "iso": "TV",
+    "name": "Tuvalu",
+    "areaCode": "688",
+    "population": 10472,
+    "area": 26
+  },
+  {
+    "type": "country",
+    "iso": "VI",
+    "name": "U.S. Virgin Islands",
+    "areaCode": "1-340",
+    "population": 108708,
+    "area": 352
+  },
+  {
+    "type": "country",
+    "iso": "UG",
+    "name": "Uganda",
+    "areaCode": "256",
+    "population": 33398682,
+    "area": 236040
+  },
+  {
+    "type": "country",
+    "iso": "UA",
+    "name": "Ukraine",
+    "areaCode": "380",
+    "population": 45415596,
+    "area": 603700
+  },
+  {
+    "type": "country",
+    "iso": "AE",
+    "name": "United Arab Emirates",
+    "areaCode": "971",
+    "population": 4975593,
+    "area": 82880
+  },
+  {
+    "type": "country",
+    "iso": "GB",
+    "name": "United Kingdom",
+    "areaCode": "44",
+    "population": 62348447,
+    "area": 244820
+  },
+  {
+    "type": "country",
+    "iso": "US",
+    "name": "United States",
+    "areaCode": "1",
+    "population": 310232863,
+    "area": 9629091
+  },
+  {
+    "type": "country",
+    "iso": "UY",
+    "name": "Uruguay",
+    "areaCode": "598",
+    "population": 3477000,
+    "area": 176220
+  },
+  {
+    "type": "country",
+    "iso": "UZ",
+    "name": "Uzbekistan",
+    "areaCode": "998",
+    "population": 27865738,
+    "area": 447400
+  },
+  {
+    "type": "country",
+    "iso": "VU",
+    "name": "Vanuatu",
+    "areaCode": "678",
+    "population": 221552,
+    "area": 12200
+  },
+  {
+    "type": "country",
+    "iso": "VA",
+    "name": "Vatican",
+    "areaCode": "379",
+    "population": 921,
+    "area": 0
+  },
+  {
+    "type": "country",
+    "iso": "VE",
+    "name": "Venezuela",
+    "areaCode": "58",
+    "population": 27223228,
+    "area": 912050
+  },
+  {
+    "type": "country",
+    "iso": "VN",
+    "name": "Vietnam",
+    "areaCode": "84",
+    "population": 89571130,
+    "area": 329560
+  },
+  {
+    "type": "country",
+    "iso": "WF",
+    "name": "Wallis and Futuna",
+    "areaCode": "681",
+    "population": 16025,
+    "area": 274
+  },
+  {
+    "type": "country",
+    "iso": "EH",
+    "name": "Western Sahara",
+    "areaCode": "212",
+    "population": 273008,
+    "area": 266000
+  },
+  {
+    "type": "country",
+    "iso": "YE",
+    "name": "Yemen",
+    "areaCode": "967",
+    "population": 23495361,
+    "area": 527970
+  },
+  {
+    "type": "country",
+    "iso": "ZM",
+    "name": "Zambia",
+    "areaCode": "260",
+    "population": 13460305,
+    "area": 752614
+  },
+  {
+    "type": "country",
+    "iso": "ZW",
+    "name": "Zimbabwe",
+    "areaCode": "263",
+    "population": 11651858,
+    "area": 390580
+  }
+]

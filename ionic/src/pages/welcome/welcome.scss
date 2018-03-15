@@ -20,9 +20,9 @@ page-welcome {
     }
   }
   .logoContainer {
-    max-height: 220px;
+    max-height: 200px;
     width: 100%;
-    height: 40%;
+    height: 30%;
     text-align: center;
     padding: 20px;
     -webkit-transition: height 300ms ease-in-out;
@@ -50,9 +50,7 @@ page-welcome {
   }
   .buttons {
     text-align: center;
-    position: absolute;
     width: 100%;
-    bottom: 7%;
     button {
       width: 60%;
       margin-top: 20px;
@@ -140,11 +138,20 @@ page-welcome {
     margin-right: auto;
   }
   .login {
+    margin-top: -20px;
     opacity: 0;
     -webkit-transition: opacity 500ms ease-in-out;
     -moz-transition: opacity 500ms ease-in-out;
     -ms-transition: opacity 500ms ease-in-out;
     -o-transition: opacity 500ms ease-in-out;
     transition: opacity 500ms ease-in-out;
+  }
+  .footerImg {
+    position: absolute;
+    bottom: -10px;
+    width: 100%;
+    img {
+      width: 100%;
+    }
   }
 }

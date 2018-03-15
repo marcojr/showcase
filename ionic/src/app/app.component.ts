@@ -16,7 +16,23 @@ export class MyApp {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-      this.gp.rootPage = WelcomePage;
+      //localRnd
+        this.gp.localRnd = Math.random();
+        this.gp.readLocalDB('localRnd').then(localRnd => {
+          if(localRnd === null) {
+              this.gp.writeLocalDB('localRnd',this.gp.localRnd );
+              this.gp.localRnd = localRnd;
+          }
+            this.gp.readLocalDB('user').then(user => {
+                if(user === null) {
+                    this.gp.rootPage = WelcomePage;
+                }
+                else {
+                  this.gp.user = user;
+                  this.gp.rootPage = HomePage;
+                }
+            });
+        });
     });
   }
 }

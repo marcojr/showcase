@@ -1,8 +1,10 @@
 DS_Store
 .idea/
-/node/*
 angular/*
 ionic/node_modules
 ionic/www/
 ionic/plugins
 ionic/platforms
+node/config.json
+node/logs/*
+node/node_modules

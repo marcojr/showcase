@@ -1,14 +1,16 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="appPrimary">
     <ion-title>
-      Ionic Blank
+      Thanks, {{gp.user.name.name}} !
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="pageContent">
+
 </ion-content>
+<ion-footer>
+  <button (click)="touchLogout()" ion-button color="appFontInsidePrimary" ion-button block full large clear>
+    Logout
+  </button>
+</ion-footer>

@@ -1,0 +1,36 @@
+{
+  "service" : {
+    "name" : "Simpsons",
+    "longDescription" : "Simpsons",
+    "shortDescription" : "Simpsons"
+  },
+  "registeredServices" : ["B651","B652","B653"],
+  "minAppVersion" : 0.1,
+  "tokenExpDays" : 30,
+  "database": {
+    "connection": {
+      "host": "mongodb://localhost:27017",
+      "dbName": "simpsons"
+    }
+},
+  "aws" : {
+    "key" : "xxxxx",
+    "secret" : "xxxx",
+    "assetsPath" : "xxxxxxxxx",
+    "bucket" : "xxxxx"
+  },
+  "nexmo" : {
+    "key" : "xxxxxx",
+    "secret" : "xxxxxxxx"
+  },
+  "google" : {
+    "geolocationKey" : "xxxxxxxxxx"
+  },
+  "smtp" : {
+    "server" : "nxxxxxxxxx",
+    "port" : "xxxx",
+    "useSSL" : true,
+    "username" : "xxxxxxx",
+    "password" : "xxxxxxx"
+  }
+}
