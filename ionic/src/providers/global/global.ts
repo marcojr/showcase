@@ -11,7 +11,7 @@ export class GlobalProvider {
     servers: {
       dev: 'http://localhost:4600',
       myLaptop : 'http://192.168.1.47:4600',
-      use: 'dev'
+      use: 'myLaptop'
     },
     endpoints: {
       registration: {

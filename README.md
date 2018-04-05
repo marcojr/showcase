@@ -1,10 +1,13 @@
-This is just a dummy project for people with intentions to hire my services.
+This is just a dummy project for people with intentions to hire my services evaluate my code.
 
 It's basically a demonstration of my source code on the following contexts
 
 - Node: Code using NodeJS with MongoDB and Amazon AWS API
 - Ionic: Code using Ionic 3 and Angular 5 containing: Consume of the APIs using RsJx,
          my interface Skills, my attention on details, and my programing logic
+
+There is also a WIP Xamarin Forms version of this, but it's in the beginning, so forget it for now and
+just consider the Node and Ionic.
 
 For now, only the following user stories are done:
 

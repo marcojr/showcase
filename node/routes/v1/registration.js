@@ -70,8 +70,8 @@ exports.sendSMS = function (req, res) {
             if (count < 1) {
                 //For test purposes without a need of the SMS provider, the code will
                 //always be 9999
-                //var code = generateCode();
-                const code = "9999";
+                var code = generateCode();
+                //const code = "9999";
                 const criteria = {
                     mobileNumber: req.body.mobileNumber,
                     type: 'mobile'
@@ -100,9 +100,9 @@ exports.sendSMS = function (req, res) {
                         port: 443,
                         path: path
                     };
-                    /* Uncomment this for real SMS
+
                     smsProvider.request(options, function (response) {
-                        const str = "";
+                        var str = "";
                         response.on('data', function (chunk) {
                             str += chunk;
                         });
@@ -121,8 +121,8 @@ exports.sendSMS = function (req, res) {
                                 global.utils.sendException(400,res, e);
                             }
                         });
-                    }).end();*/
-                    global.utils.sendOk(res, null);
+                    }).end();
+                    //kkglobal.utils.sendOk(res, null);
                 });
             }
             else {

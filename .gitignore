@@ -8,3 +8,12 @@ ionic/platforms
 node/config.json
 node/logs/*
 node/node_modules
+
+
+bin/
+obj/
+*.userprefs
+.packages
+/packages/*
+.vs/
+packages

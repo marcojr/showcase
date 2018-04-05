@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="xamarin_forms.PageWelcome" 
+             BackgroundColor="#68d6f9"
+             xmlns:local="clr-namespace:LoginInput;assembly=LoginInput">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BorderRadius" Value="20" />
+            </Style>
+            <Style TargetType="local:LoginInputbox">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="PlaceholderColor" Value="#9ce7ff" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="FontSize" Value="21" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+      <StackLayout>
+         <Image Source="homer.png" VerticalOptions="Start" HeightRequest="200" Margin="0,30,0,10" x:Name="logo" />
+         <Grid HorizontalOptions="Center" RowSpacing="20" x:Name="welcomeButtons" IsVisible="true">
+            <Grid.RowDefinitions>
+               <RowDefinition Height="45" />
+               <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" VerticalOptions="Fill" Text="Log me in" Clicked="touchLogIn"/>
+            <Button Grid.Row="1" VerticalOptions="Fill" Text="New User" />
+         </Grid>
+         <Grid HorizontalOptions="Center" RowSpacing="15" x:Name="loginFields" IsVisible="false" Margin="0,-80">
+            <Grid.RowDefinitions>
+               <RowDefinition Height="42" />
+               <RowDefinition Height="1" />
+               <RowDefinition Height="42" />
+               <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="40" />
+               <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+                <Image Source="icon_user.png" Grid.Row="0" Grid.Column="0" Opacity="0.5" />
+                <local:LoginInputbox Placeholder="Username or mobile" x:Name="username" Grid.Column="1" />
+                <BoxView Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="White" />
+                <Image Source="icon_password.png" Grid.Row="2" Grid.Column="0" Opacity="0.5" />
+                <local:LoginInputbox IsPassword="true" Placeholder="Password" Grid.Column="1" Grid.Row="2" />
+                <BoxView Grid.Row="3" Grid.ColumnSpan="2" BackgroundColor="White" />
+            </Grid>
+            <Grid HorizontalOptions="Center" RowSpacing="15" Margin="0,100" x:Name="loginActions" IsVisible="false">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="100" />
+                  <ColumnDefinition Width="145" />
+                </Grid.ColumnDefinitions>
+                <Label VerticalOptions="Center" FontSize="14" TextColor="White"  Grid.Row="0" Grid.Column="0" Text="Forgor your password ?" />
+                <Button HorizontalOptions="End" WidthRequest="120" Grid.Row="0" Grid.Column="1"  VerticalOptions="Fill" Text="Log me in" />
+                <Label x:Name="cancelLabel" VerticalOptions="Start" FontSize="14" TextColor="black"  Grid.Row="1" Grid.Column="0" Text="Cancel"  />
+            </Grid>
+         <Image Source="springfield.png" VerticalOptions="EndAndExpand" />
+      </StackLayout>
+   </ContentPage.Content>
+</ContentPage>
