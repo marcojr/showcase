@@ -13,6 +13,7 @@ namespace xamarin_forms
             InitializeComponent();
             BindGestures();
             LoadInitialData();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
         public void touchLogIn(object sender, EventArgs e)
         {
@@ -22,11 +23,15 @@ namespace xamarin_forms
         private async void LoadInitialData() {
             Registration registration = new Registration();
             registration.setServer("dev");
-            global.AppData = await registration.getReady();
+            ResGetReady response = await registration.getReady();
+            global.AppData = response.data;
             //Device.BeginInvokeOnMainThread(async () =>
             //{
             //    await DisplayAlert("Alertxx", global.AppData.data.texts.tos, "Ok");
             //});
+        }
+        public async void touchSignUp(object sender, EventArgs e) {
+            await Navigation.PushAsync(new PageTextView("Terms", global.AppData.texts.tos, "I Agree", TosCallback));
         }
         public void BindGestures()
         {
@@ -59,6 +64,10 @@ namespace xamarin_forms
             await Task.Delay(500);
             loginFields.IsVisible = true;
             loginActions.IsVisible = true;
+        }
+        public async void TosCallback()
+        {
+            await Navigation.PushAsync(new PageSignUp());
         }
     }
 

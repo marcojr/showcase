@@ -7,8 +7,11 @@ namespace xamarin_forms
         public App()
         {
             InitializeComponent();
-            global.test = "123";
-            MainPage = new PageWelcome();
+            /*MainPage = new NavigationPage(new PageWelcome()) { 
+                BarBackgroundColor = Color.FromHex("#68d6f9") ,
+                BarTextColor = Color.White 
+            };*/
+            MainPage = new NavigationPage(new PageSignUp());
         }
 
         protected override void OnStart()

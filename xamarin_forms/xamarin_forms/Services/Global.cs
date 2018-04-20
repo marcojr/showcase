@@ -3,7 +3,7 @@ namespace xamarin_forms
 {
     sealed class Global
     {
-        public ResGetReady AppData { get; set; }
+        public Data_getReady AppData { get; set; }
         public string test { get; set; }
         private static Global _instance = null;  
         private Global() { }

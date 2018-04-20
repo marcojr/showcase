@@ -32,7 +32,7 @@
                <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
             <Button Grid.Row="0" VerticalOptions="Fill" Text="Log me in" Clicked="touchLogIn"/>
-            <Button Grid.Row="1" VerticalOptions="Fill" Text="New User" />
+            <Button Grid.Row="1" VerticalOptions="Fill" Text="New User" Clicked="touchSignUp"  />
          </Grid>
          <Grid HorizontalOptions="Center" RowSpacing="15" x:Name="loginFields" IsVisible="false" Margin="0,-80">
             <Grid.RowDefinitions>
@@ -63,7 +63,7 @@
                 </Grid.ColumnDefinitions>
                 <Label VerticalOptions="Center" FontSize="14" TextColor="White"  Grid.Row="0" Grid.Column="0" Text="Forgor your password ?" />
                 <Button HorizontalOptions="End" WidthRequest="120" Grid.Row="0" Grid.Column="1"  VerticalOptions="Fill" Text="Log me in" />
-                <Label x:Name="cancelLabel" VerticalOptions="Start" FontSize="14" TextColor="black"  Grid.Row="1" Grid.Column="0" Text="Cancel"  />
+                <Label x:Name="cancelLabel" VerticalOptions="Start" FontSize="14" TextColor="Black"  Grid.Row="1" Grid.Column="0" Text="Cancel"  />
             </Grid>
          <Image Source="springfield.png" VerticalOptions="EndAndExpand" />
       </StackLayout>
