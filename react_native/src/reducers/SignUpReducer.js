@@ -1,10 +1,23 @@
 import { SET_COUNTRY} from "../actions/types";
 
 const INITIAL_STATE = {
+    step: 0,
+    stepDescription : 'First, we need to know some basics about you',
+    buttonText : 'Continue',
+    totalSteps: 5,
     country: {},
     mobileNumber: '',
     email: '',
     username: '',
+    confirmationCode: '',
+    resendTimeOut: 60,
+    name: '',
+    password: '',
+    passwordConfirmation: '',
+    picture: null,
+    venues: [],
+    privacy: [],
+    errorMessage: ''
 
 }
 

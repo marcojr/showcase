@@ -27,13 +27,17 @@ class welcome extends React.Component {
         const { username,password } = this.props;
         this.props.doLogin({username,password});
     }
+    startSignUp() {
+        Actions.signUp();
+    }
     goToTos(){
         this.props.setTextView(
             {
                 title: 'Terms',
                 text: 'Some words',
                 showButton: true,
-                buttonTitle : 'I agree'
+                buttonTitle : 'I agree',
+                buttonAction : this.startSignUp
             }
         );
         this.props.goToTos();

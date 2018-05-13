@@ -14,7 +14,10 @@ class textView extends React.Component {
         if(this.props.showButton) {
             return (
                 <View style={style.footer}>
-                    <Button color="#68d6f9" style={style.button} title={this.props.buttonTitle}/>
+                    <Button color="#68d6f9"
+                            style={style.button}
+                            title={this.props.buttonTitle}
+                            onPress={() => this.props.buttonAction()}/>
                 </View>
             );
         }
@@ -38,11 +41,9 @@ const mapStateToProps = state => (
         title: state.TextViewReducer.title,
         text: state.TextViewReducer.text,
         showButton: state.TextViewReducer.showButton,
-        buttonTitle : state.TextViewReducer.buttonTitle
+        buttonTitle : state.TextViewReducer.buttonTitle,
+        buttonAction: state.TextViewReducer.buttonAction
     }
 );
 
-export default connect(mapStateToProps,
-    {
-
-    })(textView);
+export default connect(mapStateToProps, {})(textView);
