@@ -1,0 +1,32 @@
+Arguments: 
+  /usr/local/bin/node /Users/marcojr/.yarn/bin/yarn.js start
+
+PATH: 
+  /Users/marcojr/.yarn/bin:/Users/marcojr/.config/yarn/global/node_modules/.bin:/Users/marcojr/Library/Developer/Xamarin/android-sdk-macosx/tools:/Users/marcojr/Library/Developer/Xamarin/android-sdk-macosx/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.11.1
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find a package.json file in "/Users/marcojr/Projects/showCase"
+      at new MessageError (/Users/marcojr/.yarn/lib/cli.js:186:110)
+      at /Users/marcojr/.yarn/lib/cli.js:40048:15
+      at Generator.next (<anonymous>)
+      at step (/Users/marcojr/.yarn/lib/cli.js:98:30)
+      at /Users/marcojr/.yarn/lib/cli.js:109:13
+      at <anonymous>
