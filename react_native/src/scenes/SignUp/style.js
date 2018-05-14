@@ -48,7 +48,7 @@ export default StyleSheet.create({
     textInput: {
         fontSize: 20
     },
-    step2 : {
+    step1 : {
         alignItems: 'center'
     },
     codeEntry : {
@@ -87,7 +87,7 @@ export default StyleSheet.create({
         color: '#FFF',
         fontSize: 30
     },
-    step4 : {
+    step3 : {
         alignItems: 'center',
         height: 350
     },
@@ -102,5 +102,34 @@ export default StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 75
+    },
+    step4: {
+        alignItems: 'center'
+    },
+    groupTitle : {
+        color: '#68d6f9',
+        padding: 15
+    },
+    groupItem :{
+        borderBottomWidth:1,
+        borderColor: '#d7d7d7',
+        flexDirection: 'row',
+        alignSelf: 'stretch',
+        justifyContent : 'space-between',
+        paddingRight: 15,
+        paddingTop: 6,
+        paddingBottom: 6,
+        alignItems: 'center'
+    },
+    groupTextWrapper: {
+        flexDirection: 'row'
+    },
+    groupItemInfo: {
+        color: '#68d6f9',
+        fontSize: 18
+    },
+    groupItemText : {
+        fontSize: 18,
+        paddingLeft: 5
     }
 });

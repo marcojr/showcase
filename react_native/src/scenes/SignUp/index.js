@@ -1,5 +1,5 @@
 import React from 'react';
-import {Animated, View, Text, Button, TextInput, Picker, TouchableOpacity, Image} from 'react-native';
+import {Animated, View, Text, Button, TextInput, Picker, TouchableOpacity, Image, Switch} from 'react-native';
 import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import FontAwesome, {Icons} from 'react-native-fontawesome';
@@ -15,6 +15,7 @@ class signUp extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
         this.fadeIn();
     }
 
@@ -77,7 +78,7 @@ class signUp extends React.Component {
         }
     }
 
-    renderStep1() {
+    renderStep0() {
         if (this.props.step == 0) {
             return (
                 <View>
@@ -117,10 +118,10 @@ class signUp extends React.Component {
         return;
     }
 
-    renderStep2() {
+    renderStep1() {
         if (this.props.step == 1) {
             return (
-                <View style={style.step2}>
+                <View style={style.step1}>
                     <View style={style.codeEntry}>
                         <View style={style.codeDigit}>
                             <Text style={style.codeText}>1</Text>
@@ -146,7 +147,7 @@ class signUp extends React.Component {
         return;
     }
 
-    renderStep3() {
+    renderStep2() {
         if (this.props.step == 2) {
             return (
                 <View>
@@ -173,10 +174,10 @@ class signUp extends React.Component {
         }
     }
 
-    renderStep4() {
+    renderStep3() {
         if (this.props.step == 3) {
             return (
-                <View style={style.step4}>
+                <View style={style.step3}>
                     <View style={style.pictureBorder}>
                         <Image
                             source={{uri: 'https://cdn.shopify.com/s/files/1/1235/0120/products/2016-Bart-T-shirt-close_1024x1024.jpg?v=1476869972'}}
@@ -195,11 +196,44 @@ class signUp extends React.Component {
             )
         }
     }
-
+    renderStep4() {
+        //alert(JSON.stringify(this.props.venues));
+        if (this.props.step == 4) {
+            return (
+                <View style={style.step4}>
+                    <Text style={style.groupTitle}>Favorites Venues</Text>
+                    {this.props.venues.map(venue => {
+                        return (
+                            <View style={style.groupItem}>
+                                <View style={style.groupTextWrapper}>
+                                    <Text style={style.groupItemInfo}>[I]</Text>
+                                    <Text style={style.groupItemText}>{venue.name}</Text>
+                                </View>
+                                <Switch onTintColor='#68d6f9'/>
+                            </View>
+                        )
+                    })}
+                    <Text style={style.groupTitle}>Initial Privacy Settings</Text>
+                    {this.props.privacy.map(privacy => {
+                        return (
+                            <View style={style.groupItem}>
+                                <View style={style.groupTextWrapper}>
+                                    <Text style={style.groupItemInfo}>[I]</Text>
+                                    <Text style={style.groupItemText}>{privacy}</Text>
+                                </View>
+                                <Switch onTintColor='#68d6f9'/>
+                            </View>
+                        )
+                    })}
+                </View>
+            );
+        }
+    }
     render() {
         return (
             <View style={style.page}>
                 <Animated.View style={[style.form, {opacity: this.state.fadeAnim}]}>
+                    {this.renderStep0()}
                     {this.renderStep1()}
                     {this.renderStep2()}
                     {this.renderStep3()}
@@ -246,8 +280,8 @@ const mapStateToProps = state => (
         password: state.SignUpReducer.password,
         passwordConfirmation: state.SignUpReducer.passwordConfirmation,
         picture: state.SignUpReducer.picture,
-        venues: state.SignUpReducer.venues,
-        privacy: state.SignUpReducer.privacy,
+        venues: state.AppReducer.venues,
+        privacy: state.AppReducer.privacyOptions,
         errorMessage: state.SignUpReducer.errorMessage,
         countryList: state.AppReducer.countries,
         showPicker: state.SignUpReducer.showPicker

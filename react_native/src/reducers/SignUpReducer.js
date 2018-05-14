@@ -8,7 +8,7 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-    step: 3,
+    step: 4,
     buttonText : 'Continue',
     totalSteps: 5,
     country: {},
