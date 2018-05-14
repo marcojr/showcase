@@ -59,11 +59,11 @@ export default StyleSheet.create({
         width: 280,
         marginTop: 50
     },
-    resendButonContainer : {
+    buttonContainer : {
         alignItems: 'center',
         marginTop: 60
     },
-    resendBorder: {
+    buttonBorder: {
         borderColor : '#68d6f9',
         borderRadius: 5,
         borderWidth: 1,
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         width: 220,
         alignItems: 'center'
     },
-    resendText : {
+    buttonText2 : {
         color: '#68d6f9',
         fontSize: 15
     },

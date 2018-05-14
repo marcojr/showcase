@@ -1,5 +1,5 @@
 import React from 'react';
-import {Animated, View, Text, Button, TextInput, Picker, TouchableOpacity} from 'react-native';
+import {Animated, View, Text, Button, TextInput, Picker, TouchableOpacity, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import FontAwesome, {Icons} from 'react-native-fontawesome';
@@ -135,9 +135,9 @@ class signUp extends React.Component {
                             <Text style={style.codeText}>4</Text>
                         </View>
                     </View>
-                    <View style={style.resendButonContainer}>
-                        <TouchableOpacity style={style.resendBorder}>
-                            <Text style={style.resendText}>Send the code again (88)</Text>
+                    <View style={style.buttonContainer}>
+                        <TouchableOpacity style={style.buttonBorder}>
+                            <Text style={style.buttonText2}>Send the code again (88)</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -145,9 +145,10 @@ class signUp extends React.Component {
         }
         return;
     }
+
     renderStep3() {
         if (this.props.step == 2) {
-            return(
+            return (
                 <View>
                     <View style={style.formRow}>
                         <TextInput
@@ -171,6 +172,30 @@ class signUp extends React.Component {
             );
         }
     }
+
+    renderStep4() {
+        if (this.props.step == 3) {
+            return (
+                <View style={{alignItems: 'center', height: 350}}>
+                    <View style={{borderWidth: 3, width: 156, height: 156, borderRadius: 156 / 2, borderColor: 'red'}}>
+                        <Image
+                            source={{uri: 'https://cdn.shopify.com/s/files/1/1235/0120/products/2016-Bart-T-shirt-close_1024x1024.jpg?v=1476869972'}}
+                            style={{width: 150, height: 150, borderRadius: 75}}/>
+                    </View>
+                    <View>
+                        <TouchableOpacity style={[style.buttonBorder,{ marginTop: 20 }]}>
+                            <Text style={style.buttonText2}>Select from camera</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[style.buttonBorder,{ marginTop: 20 }]}>
+                            <Text style={style.buttonText2}>Select from album</Text>
+                        </TouchableOpacity>
+                        <Text style={[style.stepDescriptionText,{ marginTop: 20}]}>You can skip this for now, if you wish</Text>
+                    </View>
+                </View> 
+            )
+        }
+    }
+
     render() {
         return (
             <View style={style.page}>
@@ -178,6 +203,7 @@ class signUp extends React.Component {
                     {this.renderStep1()}
                     {this.renderStep2()}
                     {this.renderStep3()}
+                    {this.renderStep4()}
                 </Animated.View>
                 <View style={style.progress}>
                     <StepProgress/>
