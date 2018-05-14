@@ -86,5 +86,21 @@ export default StyleSheet.create({
     codeText : {
         color: '#FFF',
         fontSize: 30
+    },
+    step4 : {
+        alignItems: 'center',
+        height: 350
+    },
+    pictureBorder : {
+        borderWidth: 3,
+        width: 156,
+        height: 156,
+        borderRadius: 156 / 2,
+        borderColor: '#68d6f9'
+    },
+    picture : {
+        width: 150,
+        height: 150,
+        borderRadius: 75
     }
 });

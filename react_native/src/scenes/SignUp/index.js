@@ -176,11 +176,11 @@ class signUp extends React.Component {
     renderStep4() {
         if (this.props.step == 3) {
             return (
-                <View style={{alignItems: 'center', height: 350}}>
-                    <View style={{borderWidth: 3, width: 156, height: 156, borderRadius: 156 / 2, borderColor: 'red'}}>
+                <View style={style.step4}>
+                    <View style={style.pictureBorder}>
                         <Image
                             source={{uri: 'https://cdn.shopify.com/s/files/1/1235/0120/products/2016-Bart-T-shirt-close_1024x1024.jpg?v=1476869972'}}
-                            style={{width: 150, height: 150, borderRadius: 75}}/>
+                            style={style.picture}/>
                     </View>
                     <View>
                         <TouchableOpacity style={[style.buttonBorder,{ marginTop: 20 }]}>
@@ -191,7 +191,7 @@ class signUp extends React.Component {
                         </TouchableOpacity>
                         <Text style={[style.stepDescriptionText,{ marginTop: 20}]}>You can skip this for now, if you wish</Text>
                     </View>
-                </View> 
+                </View>
             )
         }
     }
