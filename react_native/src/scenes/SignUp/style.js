@@ -47,5 +47,44 @@ export default StyleSheet.create({
     },
     textInput: {
         fontSize: 20
+    },
+    step2 : {
+        alignItems: 'center'
+    },
+    codeEntry : {
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flex: 1,
+        width: 280,
+        marginTop: 50
+    },
+    resendButonContainer : {
+        alignItems: 'center',
+        marginTop: 60
+    },
+    resendBorder: {
+        borderColor : '#68d6f9',
+        borderRadius: 5,
+        borderWidth: 1,
+        padding: 15,
+        width: 220,
+        alignItems: 'center'
+    },
+    resendText : {
+        color: '#68d6f9',
+        fontSize: 15
+    },
+    codeDigit : {
+        backgroundColor: '#d4d4d4',
+        width: 55,
+        height: 65,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    codeText : {
+        color: '#FFF',
+        fontSize: 30
     }
 });
