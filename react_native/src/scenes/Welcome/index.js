@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { View, Text, TouchableOpacity, Dimensions, TextInput} from 'react-native';
 import Image from 'react-native-scalable-image';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { Font } from 'expo';
 import { Actions } from 'react-native-router-flux';
 import { setUsername, setPassword, setMode, doLogin, goToTos,} from "../../actions/SignInActions";
 import { setTextView } from "../../actions/TextViewActions";
@@ -11,12 +10,6 @@ import { setTextView } from "../../actions/TextViewActions";
 import style from './style'
 
 class welcome extends React.Component {
-    componentDidMount() {
-        Font.loadAsync({
-            FontAwesome:
-                require('../../fonts/fontawesome-webfont.ttf')
-        });
-    }
     showInputs() {
         this.props.setMode('input');
     }

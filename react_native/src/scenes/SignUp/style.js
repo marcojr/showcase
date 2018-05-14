@@ -6,11 +6,13 @@ export default StyleSheet.create({
     },
     form: {
         flex: 16,
-        padding: 15,
-        backgroundColor: 'red'
+        paddingTop: 15,
+        paddingBottom: 15,
+        paddingLeft: 15,
+        //backgroundColor: 'red'
     },
     progress: {
-        backgroundColor: 'blue',
+        //backgroundColor: 'blue',
         flex: 2
     },
     footer : {
@@ -26,5 +28,24 @@ export default StyleSheet.create({
     },
     stepDescriptionText : {
         fontSize: 12
+    },
+    picker: {
+        backgroundColor: '#d8d8d8'
+    },
+    closePicker : {
+        alignItems: 'flex-end',
+        padding: 15
+    },
+    formRow: {
+        paddingTop:15,
+        paddingBottom: 15,
+        borderBottomWidth:1,
+        borderColor: '#d7d7d7',
+        marginBottom: 15,
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
+    textInput: {
+        fontSize: 20
     }
 });
