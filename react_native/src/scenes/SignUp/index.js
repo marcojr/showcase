@@ -145,13 +145,39 @@ class signUp extends React.Component {
         }
         return;
     }
-
+    renderStep3() {
+        if (this.props.step == 2) {
+            return(
+                <View>
+                    <View style={style.formRow}>
+                        <TextInput
+                            style={style.textInput}
+                            placeholder="Your name"
+                            onChangeText={value => this.props.setMobileNumber(value)}/>
+                    </View>
+                    <View style={style.formRow}>
+                        <TextInput
+                            style={style.textInput}
+                            placeholder="Choose a password"
+                            onChangeText={value => this.props.setMobileNumber(value)}/>
+                    </View>
+                    <View style={style.formRow}>
+                        <TextInput
+                            style={style.textInput}
+                            placeholder="Confirm your password"
+                            onChangeText={value => this.props.setMobileNumber(value)}/>
+                    </View>
+                </View>
+            );
+        }
+    }
     render() {
         return (
             <View style={style.page}>
                 <Animated.View style={[style.form, {opacity: this.state.fadeAnim}]}>
                     {this.renderStep1()}
                     {this.renderStep2()}
+                    {this.renderStep3()}
                 </Animated.View>
                 <View style={style.progress}>
                     <StepProgress/>
