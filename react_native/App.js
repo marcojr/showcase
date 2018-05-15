@@ -7,6 +7,7 @@ import Routes from './Routes';
 import reducers from './src/reducers';
 import {Font} from "expo";
 
+
 export default class App extends React
 
 .Component {

@@ -7,9 +7,25 @@ import { Actions } from 'react-native-router-flux';
 import { setUsername, setPassword, setMode, doLogin, goToTos,} from "../../actions/SignInActions";
 import { setTextView } from "../../actions/TextViewActions";
 
+
 import style from './style'
 
+import api from '../../services/api';
 class welcome extends React.Component {
+    getReady = async () => {
+        try {
+            console.log('loading...');
+            const response = await api.get('/v1/registration/getReady');
+            const {successfully, data} = response.data;
+            console.log(data);
+        }
+        catch(err) {
+            console.log(err);
+        }
+    };
+    componentDidMount() {
+        this.getReady();
+    }
     showInputs() {
         this.props.setMode('input');
     }

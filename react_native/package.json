@@ -19,10 +19,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apisauce": "^0.14.3",
     "expo": "^26.0.0",
     "react": "16.3.0-alpha.1",
     "react-native": "0.54.0",
     "react-native-fontawesome": "^5.7.0",
+    "react-native-image-picker": "^0.26.10",
     "react-native-router-flux": "^4.0.0-beta.28",
     "react-native-scalable-image": "^0.4.0",
     "react-redux": "^5.0.7",
