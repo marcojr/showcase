@@ -87,6 +87,10 @@ export default StyleSheet.create({
         color: '#FFF',
         fontSize: 30
     },
+    codeTextInput : {
+        color: '#FFF',
+        fontSize: 30
+    },
     step3 : {
         alignItems: 'center',
         height: 350

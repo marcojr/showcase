@@ -1,16 +1,28 @@
 import React from 'react';
-import {Animated, View, Text, Button, TextInput, Picker, TouchableOpacity, Image, Switch} from 'react-native';
+import {
+    Animated, View, Text, Button, TextInput, Picker,
+    TouchableOpacity, Image, Switch, Keyboard
+} from 'react-native';
 import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import FontAwesome, {Icons} from 'react-native-fontawesome';
-import {setCountry, setShowPicker, setStep, setUsername, setEmail, setMobileNumber} from "../../actions/SignUpActions";
+import {
+    setCountry, setShowPicker, setStep,
+    setUsername, setEmail, setMobileNumber, setCode,
+    setResendTimeOut, setName, setPassword, setPasswordConfirmation
+} from "../../actions/SignUpActions";
 import style from './style';
 
 class signUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fadeAnim: new Animated.Value(0), // init opacity 0
+            fadeAnim: new Animated.Value(0), // init opacity 0,
+            codeInp1: '',
+            codeInp2: '',
+            codeInp3: '',
+            codeInp4: '',
+            code: ''
         };
     }
 
@@ -77,7 +89,14 @@ class signUp extends React.Component {
             return 'Select country';
         }
     }
-
+    resendCode(){
+        if (this.props.resendTimeOut > 0) {
+            // pop error
+        }
+        else {
+            this.props.setResendTimeOut(60);
+        }
+    }
     renderStep0() {
         if (this.props.step == 0) {
             return (
@@ -120,25 +139,96 @@ class signUp extends React.Component {
 
     renderStep1() {
         if (this.props.step == 1) {
+            setTimeout(() => {
+                if (this.state.codeInp1 == '' && this.state.codeInp2 == '' &&
+                    this.state.codeInp3 == '' && this.state.codeInp4 == '' &&
+                    this.props.resendTimeOut == 60) {
+                    this.code1.focus();
+                    setInterval(() => {
+                        if (this.props.resendTimeOut > 0) {
+                            this.props.setResendTimeOut(this.props.resendTimeOut - 1);
+                        }
+
+                    }, 1000);
+                }
+            }, 800);
             return (
                 <View style={style.step1}>
                     <View style={style.codeEntry}>
                         <View style={style.codeDigit}>
-                            <Text style={style.codeText}>1</Text>
+                            <TextInput ref={(inp) => {
+                                this.code1 = inp
+                            }}
+                                       style={style.codeTextInput}
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp1: text})
+                                           this.code2.focus();
+                                       }
+                                       }
+                            />
                         </View>
                         <View style={style.codeDigit}>
-                            <Text style={style.codeText}>2</Text>
+                            <TextInput ref={(inp) => {
+                                this.code2 = inp
+                            }}
+                                       style={style.codeTextInput}
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp2: text})
+                                           if (text == '') {
+                                               this.code1.focus();
+                                           } else {
+                                               this.code3.focus();
+                                           }
+                                       }
+                                       }
+                            />
                         </View>
                         <View style={style.codeDigit}>
-                            <Text style={style.codeText}>3</Text>
+                            <TextInput ref={(inp) => {
+                                this.code3 = inp
+                            }}
+                                       style={style.codeTextInput}
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp3: text})
+                                           if (text == '') {
+                                               this.code2.focus();
+                                           } else {
+                                               this.code4.focus();
+                                           }
+                                       }
+                                       }
+                            />
                         </View>
                         <View style={style.codeDigit}>
-                            <Text style={style.codeText}>4</Text>
+                            <TextInput ref={(inp) => {
+                                this.code4 = inp
+                            }}
+                                       style={style.codeTextInput}
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp4: text})
+                                           if (text == '') {
+                                               this.code3.focus();
+                                           } else {
+                                               this.props.setCode(this.state.codeInp1 +
+                                                   this.state.codeInp2 +
+                                                   this.state.codeInp3 +
+                                                   this.state.codeInp4);
+
+                                               Keyboard.dismiss();
+                                           }
+                                       }
+                                       }
+                            />
                         </View>
                     </View>
                     <View style={style.buttonContainer}>
-                        <TouchableOpacity style={style.buttonBorder}>
-                            <Text style={style.buttonText2}>Send the code again (88)</Text>
+                        <TouchableOpacity
+                            style={style.buttonBorder}
+                            onPress={() => { this.resendCode()}}>
+                            <Text style={style.buttonText2}>
+                                Send the code
+                                again {this.props.resendTimeOut > 0 ? '(' + this.props.resendTimeOut + ')' : ''}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -155,19 +245,19 @@ class signUp extends React.Component {
                         <TextInput
                             style={style.textInput}
                             placeholder="Your name"
-                            onChangeText={value => this.props.setMobileNumber(value)}/>
+                            onChangeText={value => this.props.setName(value)}/>
                     </View>
                     <View style={style.formRow}>
                         <TextInput
                             style={style.textInput}
                             placeholder="Choose a password"
-                            onChangeText={value => this.props.setMobileNumber(value)}/>
+                            onChangeText={value => this.props.setPassword(value)}/>
                     </View>
                     <View style={style.formRow}>
                         <TextInput
                             style={style.textInput}
                             placeholder="Confirm your password"
-                            onChangeText={value => this.props.setMobileNumber(value)}/>
+                            onChangeText={value => this.props.setPasswordConfirmation(value)}/>
                     </View>
                 </View>
             );
@@ -184,18 +274,20 @@ class signUp extends React.Component {
                             style={style.picture}/>
                     </View>
                     <View>
-                        <TouchableOpacity style={[style.buttonBorder,{ marginTop: 20 }]}>
+                        <TouchableOpacity style={[style.buttonBorder, {marginTop: 20}]}>
                             <Text style={style.buttonText2}>Select from camera</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[style.buttonBorder,{ marginTop: 20 }]}>
+                        <TouchableOpacity style={[style.buttonBorder, {marginTop: 20}]}>
                             <Text style={style.buttonText2}>Select from album</Text>
                         </TouchableOpacity>
-                        <Text style={[style.stepDescriptionText,{ marginTop: 20}]}>You can skip this for now, if you wish</Text>
+                        <Text style={[style.stepDescriptionText, {marginTop: 20}]}>You can skip this for now, if you
+                            wish</Text>
                     </View>
                 </View>
             )
         }
     }
+
     renderStep4() {
         //alert(JSON.stringify(this.props.venues));
         if (this.props.step == 4) {
@@ -229,6 +321,7 @@ class signUp extends React.Component {
             );
         }
     }
+
     render() {
         return (
             <View style={style.page}>
@@ -294,5 +387,10 @@ export default connect(mapStateToProps, {
     setStep,
     setUsername,
     setEmail,
-    setMobileNumber
+    setMobileNumber,
+    setCode,
+    setResendTimeOut,
+    setName,
+    setPassword,
+    setPasswordConfirmation
 })(signUp);

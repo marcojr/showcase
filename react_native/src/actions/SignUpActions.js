@@ -32,9 +32,33 @@ export const setPassword = (txt) => {
         payload: txt
     }
 }
+export const setPasswordConfirmation = (txt) => {
+    return {
+        type: SET_REG_PASSWORD_CONFIRMATION,
+        payload: txt
+    }
+}
+export const setName = (txt) => {
+    return {
+        type: SET_REG_NAME,
+        payload: txt
+    }
+}
+export const setResendTimeOut = (ms) => {
+    return {
+        type: SET_REG_RESEND_TIMEOUT,
+        payload: parseInt(ms)
+    }
+}
 export const setStep = (txt) => {
     return {
         type: SET_REG_STEP,
+        payload: txt
+    }
+}
+export const setCode = (txt) => {
+    return {
+        type: SET_REG_CONFIRMATION_CODE,
         payload: txt
     }
 }
