@@ -68,15 +68,15 @@ export const setTos = (txt) => {
         payload: txt
     }
 }
-export const setVenues = (txt) => {
+export const setVenues = (arrayVenues) => {
     return {
         type: SET_REG_VENUES,
-        payload: txt
+        payload: arrayVenues
     }
 }
-export const setPrivacyOptions = (txt) => {
+export const setPrivacyOptions = (arrayPrivacy) => {
     return {
         type: SET_REG_PRIVACY_OPTIONS,
-        payload: txt
+        payload: arrayPrivacy
     }
 }

@@ -17,5 +17,5 @@ export const SET_REG_NAME = 'set_reg_name';
 export const SET_REG_PASSWORD = 'set_reg_password';
 export const SET_REG_PICTURE= 'set_reg_picture';
 export const SET_REG_VENUES = 'set_reg_venues';
-export const SET_REG_PRIVACY_OPTIONS = 'set_reg_privacy';
+export const SET_REG_PRIVACY_OPTIONS = 'set_reg_privacy_options';
 export const SET_REG_TOS = 'set_reg_privacy';

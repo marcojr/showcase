@@ -3,6 +3,7 @@ import {
     Animated, View, Text, Button, TextInput, Picker,
     TouchableOpacity, Image, Switch, Keyboard
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import FontAwesome, {Icons} from 'react-native-fontawesome';
@@ -22,13 +23,37 @@ class signUp extends React.Component {
             codeInp3: '',
             codeInp4: '',
             code: '',
-            step: 0,
+            step: 4,
             resendTimeOut: 60,
             showPicker: false,
             passwordConfirmation : ''
         };
+        setTimeout(() => {
+            let vf = [];
+            let pf = []
+            this.props.venuesList.map(item  => {
+                let itm = item;
+                itm.inUse = false;
+                vf.push(itm);
+                this.props.setVenues(vf)
+            });
+            this.props.privacyList.map(item => {
+                pf.push({
+                    desc : item.desc,
+                    key : item.key,
+                    payLoad: item,
+                    selected: false
+                });
+                this.props.setPrivacyOptions(pf);
+            });
+        },3000);
+
         setInterval(() => {
-            console.log(this.props.address);
+            //console.log(this.props.venuesList);
+            //console.log(this.props.privacyList);
+            //console.log(this.props.countryList);
+            console.log(this.props.privacyOptions);
+            //console.log(this.props.venues);
         },3000);
     }
 
@@ -86,7 +111,20 @@ class signUp extends React.Component {
             return;
         }
     }
-
+    showToast(type,msg) {
+        let bg = 'red';
+        let tc = 'white';
+        Toast.show(msg, {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+            backgroundColor: bg,
+            textColor: tc
+        });
+    }
     showSelectedCountry() {
         if (this.props.address.country.iso) {
             return this.props.address.country.name
@@ -96,7 +134,7 @@ class signUp extends React.Component {
     }
     resendCode(){
         if (this.state.resendTimeOut > 0) {
-            // pop error
+            this.showToast('critical','Please wait a bit more.');
         }
         else {
             this.setState({ resendTimeOut: 60 });
@@ -314,7 +352,7 @@ class signUp extends React.Component {
                             <View style={style.groupItem}>
                                 <View style={style.groupTextWrapper}>
                                     <Text style={style.groupItemInfo}>[I]</Text>
-                                    <Text style={style.groupItemText}>{privacy}</Text>
+                                    <Text style={style.groupItemText}>{privacy.desc}</Text>
                                 </View>
                                 <Switch onTintColor='#68d6f9'/>
                             </View>
@@ -371,6 +409,7 @@ const mapStateToProps = state => (
         password: state.SignUpReducer.password,
         picture: state.SignUpReducer.picture,
         privacyOptions: state.SignUpReducer.privacyOptions,
+        venues: state.SignUpReducer.venues,
         countryList: state.AppReducer.countries,
         venuesList: state.AppReducer.venues,
         privacyList: state.AppReducer.privacyOptions

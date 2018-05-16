@@ -6,6 +6,7 @@ import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { Actions } from 'react-native-router-flux';
 import { setUsername, setPassword, setMode, doLogin, goToTos,} from "../../actions/SignInActions";
 import { setTextView } from "../../actions/TextViewActions";
+import { setAppData } from "../../actions/AppActions";
 
 
 import style from './style'
@@ -17,7 +18,10 @@ class welcome extends React.Component {
             console.log('loading...');
             const response = await api.get('/v1/registration/getReady');
             const {successfully, data} = response.data;
-            console.log(data);
+            console.log(data.venues);
+            console.log(data.privacy);
+            this.props.setAppData(data);
+            Actions.signUp();
         }
         catch(err) {
             console.log(err);
@@ -147,5 +151,6 @@ export default connect(mapStateToProps,
         setMode,
         doLogin,
         goToTos,
-        setTextView
+        setTextView,
+        setAppData
     })(welcome);

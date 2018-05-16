@@ -7,7 +7,7 @@ import {
     SET_REG_STEP, SET_REG_RESEND_TIMEOUT,
     SET_REG_CONFIRMATION_CODE,
     SET_REG_VENUES,
-    SET_REG_PRIVACY,
+    SET_REG_PRIVACY_OPTIONS,
     SET_REG_PICTURE,
     SET_REG_PASSWORD_CONFIRMATION,
     SET_REG_PASSWORD,
@@ -59,7 +59,7 @@ export default (state = INITIAL_STATE, action) => {
         case SET_REG_NAME:return {...state, name : { ...state.name, name : action.payload}}
         case SET_REG_PASSWORD:return {...state, password: action.payload}
         case SET_REG_VENUES:return {...state, venues: action.payload}
-        case SET_REG_PRIVACY:return {...state, privacy: action.payload}
+        case SET_REG_PRIVACY_OPTIONS:return {...state, privacyOptions: action.payload}
         case SET_REG_PICTURE:return {...state, picture: action.payload}
     }
     return state;
