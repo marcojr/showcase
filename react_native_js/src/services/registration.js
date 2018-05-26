@@ -8,3 +8,9 @@ const api = create({
 export const GetReady = async () => {
   return api.get(BACKEND.endpoints.registration.getReady)
 }
+export const CheckAvailability = (endPoint, context, data) => {
+    return api.get(BACKEND.endpoints.registration[endPoint] +'?' + context +'=' + data)
+}
+export const SendSMS = (mobileNumber) => {
+    return api.post(BACKEND.endpoints.registration.sendSMS, {mobileNumber})
+}
