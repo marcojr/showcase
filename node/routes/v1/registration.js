@@ -1,77 +1,80 @@
 const trace = require('../../libs/trace');
-exports.getReady = function(req, res) {
+exports.getReady = function (req, res) {
     const context = 'registration/getReady';
-    global.db.countries.find({ allowed: true})
-        .project({ iso :true, name : true, areaCode: true, _id: false})
-        .toArray(function(err, countries){
-            for(var i=0; i < countries.length; i++){
+    global.db.countries.find({allowed: true})
+        .project({iso: true, name: true, areaCode: true, _id: false})
+        .toArray(function (err, countries) {
+            for (var i = 0; i < countries.length; i++) {
                 countries[i].areaCode = parseInt(countries[i].areaCode);
             }
-        if(err !== null) {
-            global.utils.sendDbError(res,context);
-            return;
-        }
-        const out = {
-            countries: countries,
-            venues : global.static.venues,
-            texts : global.static.texts,
-            privacyOptions : global.static.privacyOptions
-        };
-        global.utils.sendOk(res, out);
-    });
+            if (err !== null) {
+                global.utils.sendDbError(res, context);
+                return;
+            }
+            const out = {
+                countries: countries,
+                venues: global.static.venues,
+                texts: global.static.texts,
+                privacyOptions: global.static.privacyOptions
+            };
+            global.utils.sendOk(res, out);
+        });
 }
 exports.sendSMS = function (req, res) {
     const context = 'registration/sendSMS';
     var e;
-    const cc = global.utils.checkConstraints(req,res,context);
-    if(!cc.isValid) {
+    const cc = global.utils.checkConstraints(req, res, context);
+    if (!cc.isValid) {
         e = {
             code: 'CONSTRAINTS_CHECK_FAILURE',
-            context : context,
-            warnings : cc.warnings
+            context: context,
+            warnings: cc.warnings
         }
-        global.utils.sendException(400,res, e);
+        global.utils.sendException(400, res, e);
         return;
     }
     const preCheck = {
         "$or":
             [
-                { "ipAddress": req.connection.remoteAddress},
-                { "mobileNumber" : req.body.mobileNumber }
+                {"ipAddress": req.connection.remoteAddress},
+                {"mobileNumber": req.body.mobileNumber}
             ]
     };
-    global.db.verify.findOne(preCheck, function(err,pc) {
-        if(err !== null) {
-            global.utils.sendDbError(res,context);
+    global.db.verify.findOne(preCheck, function (err, pc) {
+        if (err !== null) {
+            global.utils.sendDbError(res, context);
             return;
         }
         if (pc !== null) {
             const d1 = new Date();
             const d2 = new Date(pc.timestamp);
             const diff = Math.abs((d1.getTime() - d2.getTime()) / 1000);
-            if(diff < 60) {
+            if (diff < 6) {
                 e = {
                     code: 'RECENTLY_SENT_SMS',
-                    context : context
+                    context: context
                 }
-                global.utils.sendException(401,res, e);
+                global.utils.sendException(401, res, e);
                 return;
             }
         }
         checkMobileAvailability(req.body.mobileNumber).then(function (count) {
-            if(count > 0) {
+            if (count > 0) {
                 e = {
                     code: 'MOBILE_IN_USE',
-                    context : context
+                    context: context
                 }
-                global.utils.sendException(401,res, e);
+                global.utils.sendException(401, res, e);
                 return;
             }
             if (count < 1) {
                 //For test purposes without a need of the SMS provider, the code will
                 //always be 9999
+                //set global.config.simulateAsNineNineNine to true for this
                 var code = generateCode();
-                //const code = "9999";
+                if (global.config.nexmo.simulateAs9999) {
+                    code = '9999';
+                }
                 const criteria = {
                     mobileNumber: req.body.mobileNumber,
                     type: 'mobile'
@@ -85,8 +88,8 @@ exports.sendSMS = function (req, res) {
                     }
                 };
                 global.db.verify.update(criteria, update, {upsert: true}, function (err, db) {
-                    if(err !== null) {
-                        global.utils.sendDbError(res,context);
+                    if (err !== null) {
+                        global.utils.sendDbError(res, context);
                         return;
                     }
                     const from = global.config.service.shortDescription;
@@ -100,37 +103,41 @@ exports.sendSMS = function (req, res) {
                         port: 443,
                         path: path
                     };
-
-                    smsProvider.request(options, function (response) {
-                        var str = "";
-                        response.on('data', function (chunk) {
-                            str += chunk;
-                        });
-                        response.on('end', function () {
-                            resJson = JSON.parse(str);
-                            if (resJson.messages[0].status == 0) {
-                                trace.log('sms', 'SMS sent to ' + req.body.mobileNumber + ': ' + code);
-                                trace.log('sms', 'Balance on SMS Provider :  ' + resJson.messages[0]["remaining-balance"]);
-                                global.utils.sendOk(res, null);
-                            } else {
-                                trace.log('sms', 'Unable to send SMS to ' + req.body.mobileNumber + ' - ' + resJson.messages[0].status);
-                                e = {
-                                    code: 'NUMBER_CANNOT_BE_ACCEPTED',
-                                    context : context
+                    if (!global.config.nexmo.simulateAs9999) {
+                        smsProvider.request(options, function (response) {
+                            var str = "";
+                            response.on('data', function (chunk) {
+                                str += chunk;
+                            });
+                            response.on('end', function () {
+                                resJson = JSON.parse(str);
+                                if (resJson.messages[0].status == 0) {
+                                    trace.log('sms', 'SMS sent to ' + req.body.mobileNumber + ': ' + code);
+                                    trace.log('sms', 'Balance on SMS Provider :  ' + resJson.messages[0]["remaining-balance"]);
+                                    global.utils.sendOk(res, null);
+                                } else {
+                                    trace.log('sms', 'Unable to send SMS to ' + req.body.mobileNumber + ' - ' + resJson.messages[0].status);
+                                    e = {
+                                        code: 'NUMBER_CANNOT_BE_ACCEPTED',
+                                        context: context
+                                    }
+                                    global.utils.sendException(400, res, e);
                                 }
-                                global.utils.sendException(400,res, e);
-                            }
-                        });
-                    }).end();
-                    //kkglobal.utils.sendOk(res, null);
+                            });
+
+                        }).end();
+                    } else {
+                        trace.log('sms', 'SMS sent to ' + req.body.mobileNumber + ': ' + code);
+                        global.utils.sendOk(res, null);
+                    }
                 });
             }
             else {
                 e = {
                     code: 'NUMBER_CANNOT_BE_ACCEPTED',
-                    context : context
+                    context: context
                 }
-                global.utils.sendException(400,res, e);
+                global.utils.sendException(400, res, e);
             }
         });
     });
@@ -138,14 +145,14 @@ exports.sendSMS = function (req, res) {
 exports.confirmSMS = function (req, res) {
     const context = 'registration/confirmSMS';
     var e;
-    const cc = global.utils.checkConstraints(req,res,context);
-    if(!cc.isValid) {
+    const cc = global.utils.checkConstraints(req, res, context);
+    if (!cc.isValid) {
         e = {
             code: 'CONSTRAINTS_CHECK_FAILURE',
-            context : context,
-            warnings : cc.warnings
+            context: context,
+            warnings: cc.warnings
         }
-        global.utils.sendException(400,res, e);
+        global.utils.sendException(400, res, e);
         return;
     }
     const criteria = {
@@ -153,17 +160,18 @@ exports.confirmSMS = function (req, res) {
         type: 'mobile',
         code: req.body.code
     };
+    console.log(criteria);
     global.db.verify.findOne(criteria, function (err, doc) {
-        if(err !== null) {
-            global.utils.sendDbError(res,context);
+        if (err !== null) {
+            global.utils.sendDbError(res, context);
             return;
         }
         if (doc == null) {
             e = {
                 code: 'INVALID_NUMBER',
-                context : 'registration/confirmSMS'
+                context: 'registration/confirmSMS'
             }
-            global.utils.sendException(401,res, e);
+            global.utils.sendException(401, res, e);
         }
         else {
             global.utils.sendOk(res, {uuid: doc.uuid});
@@ -172,19 +180,19 @@ exports.confirmSMS = function (req, res) {
 }
 exports.checkUsernameAvailability = function (req, res) {
     const context = 'registration/checkUsernameAvailability';
-    const cc = global.utils.checkConstraints(req,res,context);
-    if(!cc.isValid) {
+    const cc = global.utils.checkConstraints(req, res, context);
+    if (!cc.isValid) {
         e = {
             code: 'CONSTRAINTS_CHECK_FAILURE',
-            context : context,
-            warnings : cc.warnings
+            context: context,
+            warnings: cc.warnings
         }
-        global.utils.sendException(400,res, e);
+        global.utils.sendException(400, res, e);
         return;
     }
     checkUsernameAvailability(req.query.username.toLowerCase()).then(function (count) {
         if (count < 0) {
-            global.utils.sendDbError(res,context);
+            global.utils.sendDbError(res, context);
             return;
         }
         if (count > 0) {
@@ -202,19 +210,19 @@ exports.checkUsernameAvailability = function (req, res) {
 exports.checkEmailAvailability = function (req, res) {
     const context = 'registration/checkEmailAvailability';
     var e;
-    const cc = global.utils.checkConstraints(req,res,context);
-    if(!cc.isValid) {
+    const cc = global.utils.checkConstraints(req, res, context);
+    if (!cc.isValid) {
         e = {
             code: 'CONSTRAINTS_CHECK_FAILURE',
-            context : context,
-            warnings : cc.warnings
+            context: context,
+            warnings: cc.warnings
         }
-        global.utils.sendException(400,res, e);
+        global.utils.sendException(400, res, e);
         return;
     }
     checkEmailAvailability(req.query.email).then(function (count) {
         if (count < 0) {
-            global.utils.sendDbError(res,context);
+            global.utils.sendDbError(res, context);
             return;
         }
         if (count > 0) {
@@ -232,20 +240,20 @@ exports.checkEmailAvailability = function (req, res) {
 exports.checkMobileAvailability = function (req, res) {
     //Remember: If mobile starts with "+", this must be encoded ! %2B
     const context = 'registration/checkMobileAvailability';
-    const cc = global.utils.checkConstraints(req,res,context);
+    const cc = global.utils.checkConstraints(req, res, context);
     var e;
-    if(!cc.isValid) {
+    if (!cc.isValid) {
         e = {
             code: 'CONSTRAINTS_CHECK_FAILURE',
-            context : context,
-            warnings : cc.warnings
+            context: context,
+            warnings: cc.warnings
         }
-        global.utils.sendException(400,res, e);
+        global.utils.sendException(400, res, e);
         return;
     }
     checkMobileAvailability(req.query.mobile).then(function (count) {
         if (count < 0) {
-            global.utils.sendDbError(res,context);
+            global.utils.sendDbError(res, context);
             return;
         }
         if (count > 0) {
@@ -261,57 +269,59 @@ exports.checkMobileAvailability = function (req, res) {
     });
 }
 exports.register = function (req, res) {
+    console.log('body');
+    console.log(req.body);
     const context = 'registration/register';
-    const cc = global.utils.checkConstraints(req,res,context);
+    const cc = global.utils.checkConstraints(req, res, context);
     var e;
-    if(!cc.isValid) {
+    if (!cc.isValid) {
         e = {
             code: 'CONSTRAINTS_CHECK_FAILURE',
-            context : context,
-            warnings : cc.warnings
+            context: context,
+            warnings: cc.warnings
         }
-        global.utils.sendException(400,res, e);
+        global.utils.sendException(400, res, e);
         return;
     }
     getPhoneByUUID(req.body.phoneUUID, req.body.phoneCode).then(function (phone) {
         if (phone == null) {
             e = {
                 code: 'INVALID_MOBILE',
-                context : 'registration/register'
+                context: 'registration/register'
             }
-            global.utils.sendException(400,res, e);
+            global.utils.sendException(400, res, e);
             return;
         }
         checkEmailAvailability(req.body.email).then(function (countEmail) {
             if (parseInt(countEmail) > 0) {
                 e = {
                     code: 'EMAIL_ALREADY_IN_USE',
-                    context : 'registration/register'
+                    context: 'registration/register'
                 }
-                global.utils.sendException(400,res, e);
+                global.utils.sendException(400, res, e);
                 return;
             }
             checkUsernameAvailability(req.body.username).then(function (countUsername) {
-                if (parseInt(countUsername) >  0) {
+                if (parseInt(countUsername) > 0) {
                     e = {
                         code: 'USERNAME_UNAVAILABLE',
-                        context : 'registration/register'
+                        context: 'registration/register'
                     }
-                    global.utils.sendException(400,res, e);
+                    global.utils.sendException(400, res, e);
                     return;
                 }
                 const uuid = require('uuid/v4')();
-                const getPrivacyOptions = function() {
+                const getPrivacyOptions = function () {
                     var opts = global.static.privacyOptions;
                     var bdy = req.body.privacyOptions;
                     var out = [];
-                    for(var i=0; i < opts.length;i++){
+                    for (var i = 0; i < opts.length; i++) {
                         var o = {
-                            key : opts[i].key,
+                            key: opts[i].key,
                             value: opts[i].defaultValue
                         }
-                        for(var j=0; j < bdy.length;j++){
-                            if(bdy[j].key === opts[i].key){
+                        for (var j = 0; j < bdy.length; j++) {
+                            if (bdy[j].key === opts[i].key) {
                                 o.value = bdy[j].value
                             }
                         }
@@ -324,7 +334,7 @@ exports.register = function (req, res) {
                     "username": req.body.username.toLowerCase(),
                     "uuid": uuid,
                     "password": require('MD5')(req.body.password),
-                    "name" : req.body.name,
+                    "name": req.body.name,
                     "bio": req.body.bio,
                     "registrationDate": new Date(),
                     "status": "active",
@@ -358,25 +368,27 @@ exports.register = function (req, res) {
                             "confirmed": true
                         }
                     ],
-                    "lastRelevantUpdate" : null,
-                    "tos" : [{
+                    "lastRelevantUpdate": null,
+                    "tos": [{
                         timestamp: new Date(),
                         ipAddress: req.connection.remoteAddress,
                         agreed: req.body.tos
                     }],
-                    "requiresNewTosAcceptance" : false,
+                    "requiresNewTosAcceptance": false,
                     "sessions": [],
                     "venues": req.body.venues,
-                    "privacyOptions" : getPrivacyOptions(),
+                    "privacyOptions": getPrivacyOptions(),
                     "customData": req.body.customData ? req.body.customData : null
                 };
+                console.log('----');
+                console.log(newUser);
                 global.db.users.insertOne(newUser, function (err) {
                     if (err) {
                         e = {
                             code: 'REGISTRATION_ERROR',
-                            context : 'registration/register'
+                            context: 'registration/register'
                         }
-                        global.utils.sendDbError(res,context);
+                        global.utils.sendDbError(res, context);
                     }
                     else {
                         global.utils.sendOk(res, null);
@@ -385,15 +397,17 @@ exports.register = function (req, res) {
                             uuid: req.body.phoneUUID
                         }
                     }
-                    if(req.body.picture != null) {
-                        global.cloudStorage.writeFile('users', uuid +'.png',req.body.picture);
+                    if (req.body.picture != null) {
+                        global.cloudStorage.writeFile('users', uuid + '.png', req.body.picture);
                     }
-                    global.db.verify.remove(critSmsDel, function(err, result) {});
+                    global.db.verify.remove(critSmsDel, function (err, result) {
+                    });
                 });
             });
         });
     });
 }
+
 function checkUsernameAvailability(username) {
     var deferred = Q.defer();
     const criteria = {
@@ -403,7 +417,7 @@ function checkUsernameAvailability(username) {
         ]
     };
     global.db.users.count(criteria, function (err, count) {
-        if(err !== null) {
+        if (err !== null) {
             deferred.resolve(-1);
         }
         else {
@@ -422,7 +436,7 @@ exports.checkUsernameAvailability2 = function (username) {
         ]
     };
     global.db.users.count(criteria, function (err, count) {
-        if(err !== null) {
+        if (err !== null) {
             deferred.resolve(-1);
         }
         else {
@@ -444,7 +458,7 @@ function checkEmailAvailability(email) {
         }
     };
     global.db.users.count(criteria, function (err, count) {
-        if(err !== null) {
+        if (err !== null) {
             deferred.resolve(-1);
         }
         else {
@@ -466,7 +480,7 @@ function checkMobileAvailability(mobile) {
         }
     };
     global.db.users.count(criteria, function (err, count) {
-        if(err !== null) {
+        if (err !== null) {
             deferred.resolve(-1);
         }
         else {

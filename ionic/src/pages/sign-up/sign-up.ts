@@ -38,7 +38,7 @@ export class SignUpPage {
   fullMobileNumber: string ;
   venuesForm: Venue[] = [];
   privacyForm = [];
-  currentStep: number = 0;
+  currentStep: number = 4;
   lowerVisible: boolean = true;
   showPage: boolean = true;
   ctdDown: number = 0;
