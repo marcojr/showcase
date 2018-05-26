@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import ModalSelector from 'react-native-modal-selector'
 import FontAwesome, {Icons} from 'react-native-fontawesome';
-import {CheckAvailability,SendSMS} from "../../services/registration";
+import {CheckAvailability, SendSMS} from "../../services/registration";
 import {ShowToast} from '../../libs/utils'
 
 import style from './style';
@@ -28,43 +28,46 @@ class Register extends React.Component {
             showPicker: false,
             passwordConfirmation: '',
             mobileNumber: '447903450712',
+            fullMobileNumber: null,
             buttonText: 'Continue',
-            username : 'xxxxxx',
-            phoneUUID : '',
-            phoneCode : '',
-            picture : '',
-            password : 'Dallas1234',
-            name :{
-                title : '',
+            username: 'xxxxxx',
+            phoneUUID: '',
+            phoneCode: '',
+            picture: '',
+            password: 'Dallas1234',
+            name: {
+                title: '',
                 name: 'My name'
             },
             birthDay: '',
-            bio : '',
-            gender : '',
-            address : {
-                streetLine1 : '',
-                streetLine2 : '',
-                city : '',
-                stateOrCounty : '',
-                postCode : '',
-                latitude : '',
-                longitude : '',
-                country : {
+            bio: '',
+            gender: '',
+            address: {
+                streetLine1: '',
+                streetLine2: '',
+                city: '',
+                stateOrCounty: '',
+                postCode: '',
+                latitude: '',
+                longitude: '',
+                country: {
                     iso: '',
                     name: '',
-                    areaCode : ''
+                    areaCode: ''
                 }
             },
             venues: [],
-            email : 'xxxx@edeee.com',
-            privacyOptions : [],
-            tos : '',
-            customData : {}
+            email: 'xxxx@edeee.com',
+            privacyOptions: [],
+            tos: '',
+            customData: {}
         };
     }
+
     componentDidMount() {
         this.fadeIn();
     }
+
     fadeIn() {
         Animated.timing(
             this.state.fadeAnim,
@@ -78,6 +81,7 @@ class Register extends React.Component {
             {toValue: 0},
         ).start();
     }
+
     selectCountry() {
         let data = [];
         this.props.countryList.map(item => {
@@ -113,84 +117,118 @@ class Register extends React.Component {
             </ModalSelector>
         );
     }
+
     bottomButtomAction() {
         if (this.state.step == 0) {
-            this.performAvailabilityChecks().then(result => {
-                let passed = true;
-                result.forEach(r =>{
-                    if (r.error) {
-                        passed = false;
-                        ShowToast('critical', 'Unable to proceed - Server error');
-                        return;
-                    }
-                    if (!r.isAvailable) {
-                        passed = false;
-                        ShowToast('critical', r.textForMsg);
-                        return;
-                    }
-                })
-                if (passed) {
-                    SendSMS(this.state.mobileNumber).then(successfully => {
-                        if (successfully) {
-                            alert('Ok, sent !')
-                        } else {
-                            ShowToast('critical', 'Unable to send SMS - Server error');
-                        }
-                    });
-                }
-            })
+            this.submitStep0();
         }
     }
+
     performAvailabilityChecks() {
-            return new Promise(resolve => {
-                let checks = [
-                    {
-                        endPoint : 'checkUsernameAvailability',
-                        bodyKey : 'username',
-                        textForMsg : 'Username already taken.Chose another one.',
-                        value : this.state.username.toLowerCase(),
-                        isAvailable: false,
-                        error : undefined
-                    },
-                    {
-                        endPoint : 'checkMobileAvailability',
-                        bodyKey : 'mobile',
-                        textForMsg : 'Mobile number already in use. Try to recover your password instead',
-                        value : this.state.mobileNumber,
-                        isAvailable: false,
-                        error : undefined
-                    },
-                    {
-                        endPoint : 'checkEmailAvailability',
-                        bodyKey : 'email',
-                        textForMsg : 'E-mail already in use. Try to recover your password instead',
-                        value : this.state.email.toLowerCase(),
-                        isAvailable: false,
-                        error : undefined
+        return new Promise(resolve => {
+            let checks = [
+                {
+                    endPoint: 'checkUsernameAvailability',
+                    bodyKey: 'username',
+                    textForMsg: 'Username already taken.Chose another one.',
+                    value: this.state.username.toLowerCase(),
+                    isAvailable: false,
+                    error: undefined
+                },
+                {
+                    endPoint: 'checkMobileAvailability',
+                    bodyKey: 'mobile',
+                    textForMsg: 'Mobile number already in use. Try to recover your password instead',
+                    value: this.state.mobileNumber,
+                    isAvailable: false,
+                    error: undefined
+                },
+                {
+                    endPoint: 'checkEmailAvailability',
+                    bodyKey: 'email',
+                    textForMsg: 'E-mail already in use. Try to recover your password instead',
+                    value: this.state.email.toLowerCase(),
+                    isAvailable: false,
+                    error: undefined
+                }
+            ];
+            //ToDo: Find some how to transform it in a pure function.
+            let checked = 0;
+            checks.forEach(async c => {
+                try {
+                    const response = await CheckAvailability(c.endPoint, c.bodyKey, c.value);
+                    const {data} = response.data;
+                    c.isAvailable = data.isAvailable;
+                    checked++;
+                    if (checked === checks.length) {
+                        resolve(checks);
                     }
-                ];
-                //ToDo: Find some how to transform it in a pure function.
-                let checked = 0;
-                checks.forEach(async c => {
-                    try {
-                        const response = await CheckAvailability(c.endPoint, c.bodyKey , c.value);
-                        const {data} = response.data;
-                        c.isAvailable = data.isAvailable;
-                        checked++;
-                        if (checked === checks.length) {
-                            resolve(checks);
-                        }
+                }
+                catch (err) {
+                    c.error = err.error;
+                    checked++;
+                    if (checked === checks.length) {
+                        resolve(checks);
                     }
-                    catch (err) {
-                        c.error = err.error;
-                        checked++;
-                        if (checked === checks.length) {
-                            resolve(checks);
-                        }
+                }
+            });
+        });
+    }
+    submitStep0() {
+        if(this.state.address.country.iso === '' || !this.state.mobileNumber || !this.state.email || !this.state.username){
+            ShowToast('critical', 'All fields are mandatory');
+            return;
+        }
+        let rgMobile = new RegExp(/^\d+$/);
+        if(!rgMobile.test(this.state.mobileNumber) || this.state.mobileNumber.length < 8 || this.state.mobileNumber.length > 15) {
+            ShowToast('critical','Invalid mobile number');
+            return;
+        }
+        let rgEmail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        if(!rgEmail.test(this.state.email)) {
+            ShowToast('critical','Invalid E-Mail');
+            return;
+        }
+        let rgUsername = new RegExp(/^[0-9a-zA-Z]+$/);
+        if(!rgUsername.test(this.state.username)) {
+            ShowToast('critical','Only alphanumeric and numbers characters are allowed for username.');
+            return;
+        }
+        if (!isNaN(+this.state.username.substring(1,0)) ) {
+            ShowToast('critical','Username cannot start with a number');
+            return;
+        }
+        if (this.state.username.length > 20 || this.state.username.length < 2) {
+            ShowToast('critical', 'Username must have between 2 and 15 characters');
+            return;
+        }
+        this.setState({fullMobileNumber : this.state.address.country.areaCode + this.state.mobileNumber});
+        this.performAvailabilityChecks().then(result => {
+            let passed = true;
+            result.forEach(r => {
+                if (r.error) {
+                    passed = false;
+                    ShowToast('critical', 'Unable to proceed - Server error');
+                    return;
+                }
+                if (!r.isAvailable) {
+                    passed = false;
+                    ShowToast('critical', r.textForMsg);
+                    return;
+                }
+            })
+            if (passed) {
+                SendSMS(this.state.fullMobileNumber).then(successfully => {
+                    if (successfully) {
+                        alert('Ok, sent !')
+                    } else {
+                        ShowToast('critical', 'Unable to send SMS - Server error');
                     }
                 });
-            });
-        }
+            }
+        })
+
+}
     renderStep0() {
         if (this.state.step == 0) {
             return (
@@ -222,22 +260,23 @@ class Register extends React.Component {
                             keyboardType='email-address'
                             value={this.state.email}
                             placeholder="Email"
-                            onChangeText={value => this.setState({ email: value})}/>
+                            onChangeText={value => this.setState({email: value})}/>
                     </View>
                     <View style={style.formRow}>
                         <TextInput
                             style={style.textInput}
                             underlineColorAndroid='transparent'
                             value={this.state.username}
-                            maxLength={16}
+                            maxLength={20}
                             placeholder="Choose an username"
-                            onChangeText={value => this.setState({ username: value})}/>
+                            onChangeText={value => this.setState({username: value})}/>
                     </View>
                 </View>
             )
         }
         return;
     }
+
     render() {
         return (
             <View behavior="padding" style={style.page}>
@@ -260,6 +299,7 @@ class Register extends React.Component {
         );
     }
 }
+
 const stepDescs = [
     "First, we need to know some basics about you",
     "When you receive the code by SMS, please type it",
@@ -278,6 +318,4 @@ const mapStateToProps = state => (
     }
 );
 
-export default connect(mapStateToProps, {
-
-})(Register);
+export default connect(mapStateToProps, {})(Register);
