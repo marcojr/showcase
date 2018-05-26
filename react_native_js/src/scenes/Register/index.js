@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import ModalSelector from 'react-native-modal-selector'
 import FontAwesome, {Icons} from 'react-native-fontawesome';
-import {CheckAvailability, SendSMS} from "../../services/registration";
+import {CheckAvailability, SendSMS,ConfirmSMS} from "../../services/registration";
 import {ShowToast} from '../../libs/utils'
 
 import style from './style';
@@ -117,13 +117,40 @@ class Register extends React.Component {
             </ModalSelector>
         );
     }
-
+    displayNextForm(){
+        this.fadeOut();
+        setTimeout(() => {
+            this.setState({step: this.state.step + 1});
+            this.fadeIn();
+        }, 700);
+    }
     bottomButtomAction() {
         if (this.state.step == 0) {
             this.submitStep0();
         }
+        if (this.state.step == 1) {
+            this.submitStep1();
+        }
     }
-
+    resendCode() {
+        if (this.state.resendTimeOut > 0) {
+            ShowToast('critical', 'Please wait a bit more.')
+        }
+        else {
+            this.setState({resendTimeOut: 60,
+            codeInp1: '',
+            codeInp2: '',
+            codeInp3: '',
+            codeInp4: '',
+            code: ''});
+            this.code1.focus();
+            SendSMS(this.state.fullMobileNumber).then(successfully => {
+                if (!successfully) {
+                    ShowToast('critical', 'Unable to send SMS - Server error');
+                }
+            });
+        }
+    }
     performAvailabilityChecks() {
         return new Promise(resolve => {
             let checks = [
@@ -220,7 +247,7 @@ class Register extends React.Component {
             if (passed) {
                 SendSMS(this.state.fullMobileNumber).then(successfully => {
                     if (successfully) {
-                        alert('Ok, sent !')
+                        this.displayNextForm()
                     } else {
                         ShowToast('critical', 'Unable to send SMS - Server error');
                     }
@@ -229,6 +256,34 @@ class Register extends React.Component {
         })
 
 }
+    async submitStep1() {
+        console.log(this.state.code,this.state.fullMobileNumber)
+        try {
+            const response = await ConfirmSMS(this.state.code,this.state.fullMobileNumber )
+            console.log(response);
+            if (response.status == 200) {
+                const {data} = response.data;
+                this.setState({ phoneUUID: data.uuid})
+                this.displayNextForm();
+            }
+            else {
+                setTimeout(() =>{
+                    this.setState({
+                        codeInp1: '',
+                        codeInp2: '',
+                        codeInp3: '',
+                        codeInp4: '',
+                        code: ''
+                    });
+                    this.code1.focus();
+                },750)
+                ShowToast('critical', 'Invalid code - Please retry');
+            }
+        }
+        catch (err) {
+            this.showToast('critical', 'Unable to proceed - Server error');
+        }
+    }
     renderStep0() {
         if (this.state.step == 0) {
             return (
@@ -276,12 +331,132 @@ class Register extends React.Component {
         }
         return;
     }
+    renderStep1() {
+        if (this.state.step == 1) {
+            setTimeout(() => {
+                if (this.state.codeInp1 == '' && this.state.codeInp2 == '' &&
+                    this.state.codeInp3 == '' && this.state.codeInp4 == '' &&
+                    this.state.resendTimeOut == 60) {
+                    this.code1.focus();
+                    setInterval(() => {
+                        if (this.state.resendTimeOut > 0) {
+                            this.setState({resendTimeOut: this.state.resendTimeOut - 1});
+                        }
+
+                    }, 1000);
+                }
+            }, 800);
+            return (
+                <View style={style.step1}>
+                    <View style={style.codeEntry}>
+                        <View style={style.codeDigit}>
+                            <TextInput ref={(inp) => {
+                                this.code1 = inp
+                            }}
+                                       maxLength={1}
+                                       value={this.state.codeInp1}
+                                       style={style.codeTextInput}
+                                       underlineColorAndroid='transparent'
+                                       keyboardType='numeric'
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp1: text})
+                                           this.code2.focus();
+                                       }
+                                       }
+                            />
+                        </View>
+                        <View style={style.codeDigit}>
+                            <TextInput ref={(inp) => {
+                                this.code2 = inp
+                            }}
+                                       maxLength={1}
+                                       value={this.state.codeInp2}
+                                       style={style.codeTextInput}
+                                       underlineColorAndroid='transparent'
+                                       keyboardType='numeric'
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp2: text})
+                                           if (text == '') {
+                                               this.code1.focus();
+                                           } else {
+                                               this.code3.focus();
+                                           }
+                                       }
+                                       }
+                            />
+                        </View>
+                        <View style={style.codeDigit}>
+                            <TextInput ref={(inp) => {
+                                this.code3 = inp
+                            }}
+                                       maxLength={1}
+                                       value={this.state.codeInp3}
+                                       style={style.codeTextInput}
+                                       keyboardType='numeric'
+                                       underlineColorAndroid='transparent'
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp3: text})
+                                           if (text == '') {
+                                               this.code2.focus();
+                                           } else {
+                                               this.code4.focus();
+                                           }
+                                       }
+                                       }
+                            />
+                        </View>
+                        <View style={style.codeDigit}>
+                            <TextInput ref={(inp) => {
+                                this.code4 = inp
+                            }}
+                                       maxLength={1}
+                                       value={this.state.codeInp4}
+                                       style={style.codeTextInput}
+                                       keyboardType='numeric'
+                                       underlineColorAndroid='transparent'
+                                       onChangeText={(text) => {
+                                           this.setState({codeInp4: text})
+                                           if (text == '') {
+                                               this.code3.focus();
+                                           } else {
+                                               this.setState({codeInp4: text});
+                                               this.setState({
+                                                   code: this.state.codeInp1 +
+                                                   this.state.codeInp2 +
+                                                   this.state.codeInp3 +
+                                                   text
+                                               });
+                                               Keyboard.dismiss();
+                                           }
+                                       }
+                                       }
+                            />
+                        </View>
+                    </View>
+                    <View style={style.buttonContainer}>
+                        <TouchableOpacity
+                            style={style.buttonBorder}
+                            onPress={() => {
+                                this.resendCode()
+                            }}>
+                            <Text style={style.buttonText2}>
+                                Send the code
+                                again {this.state.resendTimeOut > 0 ? '(' + this.state.resendTimeOut + ')' : ''}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            );
+        }
+        return;
+    }
 
     render() {
         return (
             <View behavior="padding" style={style.page}>
                 <Animated.View style={[style.form, {opacity: this.state.fadeAnim}]}>
                     {this.renderStep0()}
+                    {this.renderStep1()}
                 </Animated.View>
                 <View style={style.progress}>
                     <StepProgress step={this.state.step} steps={totalSteps}/>

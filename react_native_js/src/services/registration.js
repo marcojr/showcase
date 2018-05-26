@@ -14,3 +14,6 @@ export const CheckAvailability = (endPoint, context, data) => {
 export const SendSMS = (mobileNumber) => {
     return api.post(BACKEND.endpoints.registration.sendSMS, {mobileNumber})
 }
+export const ConfirmSMS = (code,mobileNumber) => {
+    return api.post(BACKEND.endpoints.registration.confirmSMS, {mobileNumber,code})
+}
