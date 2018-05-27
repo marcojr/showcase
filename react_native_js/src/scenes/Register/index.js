@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {StepProgress} from '../../components';
 import ModalSelector from 'react-native-modal-selector'
 import FontAwesome, {Icons} from 'react-native-fontawesome';
+import ImagePicker from 'react-native-image-crop-picker';
 import {CheckAvailability, SendSMS,ConfirmSMS} from "../../services/registration";
 import {ShowToast} from '../../libs/utils'
 
@@ -33,7 +34,8 @@ class Register extends React.Component {
             username: 'xxxxxx',
             phoneUUID: '',
             phoneCode: '',
-            picture: '',
+            picture: null,
+            pictureMime: null,
             password: 'Dallas1234',
             name: {
                 title: '',
@@ -60,6 +62,7 @@ class Register extends React.Component {
             email: 'xxxx@edeee.com',
             privacyOptions: [],
             tos: '',
+            picturePreview: null,
             customData: {}
         };
     }
@@ -152,6 +155,47 @@ class Register extends React.Component {
                     ShowToast('critical', 'Unable to send SMS - Server error');
                 }
             });
+        }
+    }
+    selectImage(source) {
+        if(source ==='album') {
+            ImagePicker.openPicker({
+                width: 1024,
+                height: 1024,
+                cropping: true,
+                includeBase64: true
+            }).then(image => {
+                this.setState({
+                    picture : image.data,
+                    pictureMime: image.mime,
+                    picturePreview: 'data:' + image.mime +';base64,' + image.data
+                })
+            });
+        }
+        if(source ==='camera') {
+            ImagePicker.openCamera({
+                width: 1024,
+                height: 1024,
+                cropping: true,
+                includeBase64: true
+            }).then(image => {
+                this.setState({
+                    picture : image.data,
+                    pictureMime: image.mime,
+                    picturePreview: 'data:' + image.mime +';base64,' + image.data
+                })
+            });
+        }
+    }
+    displayAvatar() {
+        if(this.state.picturePreview == null) {
+            return(
+                <Image style={style.picture}/>
+            )
+        } else {
+            return(
+            <Image style={style.picture} source={{ uri: this.state.picturePreview}}/>
+            )
         }
     }
     performAvailabilityChecks() {
@@ -507,6 +551,30 @@ class Register extends React.Component {
             );
         }
     }
+    renderStep3() {
+        if (this.state.step == 3) {
+            return (
+                <View style={style.step3}>
+                    <View style={style.pictureBorder}>
+                        {this.displayAvatar()}
+                    </View>
+                    <View>
+                        <TouchableOpacity style={[style.buttonBorder, {marginTop: 20}]}
+                            onPress={() => this.selectImage('camera')}>
+                            <Text style={style.buttonText2}>Select from camera</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[style.buttonBorder, {marginTop: 20}]}
+                                          onPress={() => this.selectImage('album')}>
+                            <Text style={style.buttonText2}>Select from album</Text>
+                        </TouchableOpacity>s
+                        <Text style={[style.stepDescriptionText, {marginTop: 20}]}>You can skip this for now, if you
+                            wish
+                        </Text>
+                    </View>
+                </View>
+            )
+        }
+    }
     render() {
         return (
             <View behavior="padding" style={style.page}>
@@ -514,6 +582,7 @@ class Register extends React.Component {
                     {this.renderStep0()}
                     {this.renderStep1()}
                     {this.renderStep2()}
+                    {this.renderStep3()}
                 </Animated.View>
                 <View style={style.progress}>
                     <StepProgress step={this.state.step} steps={totalSteps}/>

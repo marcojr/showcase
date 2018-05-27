@@ -4713,6 +4713,10 @@ react-native-fontawesome@^5.7.0:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/react-native-fontawesome/-/react-native-fontawesome-5.7.0.tgz#7bfe57c21c6522d05eaf206474903c3f299bfc0d"
 
+react-native-image-crop-picker@^0.20.3:
+  version "0.20.3"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.20.3.tgz#565d69c1764e96abef23871fe4d6d58b1ee35e18"
+
 react-native-loading-spinner-overlay@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-0.5.2.tgz#b7bcd277476d596615fd7feee601789f9bdc7acc"
