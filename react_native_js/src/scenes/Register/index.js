@@ -26,7 +26,7 @@ class Register extends React.Component {
             step: 0,
             resendTimeOut: 60,
             showPicker: false,
-            passwordConfirmation: '',
+            passwordConfirmation: 'Dallas1234',
             mobileNumber: '447903450712',
             fullMobileNumber: null,
             buttonText: 'Continue',
@@ -130,6 +130,9 @@ class Register extends React.Component {
         }
         if (this.state.step == 1) {
             this.submitStep1();
+        }
+        if (this.state.step == 2) {
+            this.submitStep2();
         }
     }
     resendCode() {
@@ -283,6 +286,26 @@ class Register extends React.Component {
         catch (err) {
             this.showToast('critical', 'Unable to proceed - Server error');
         }
+    }
+    submitStep2() {
+        if (this.state.name.name.length > 50 || this.state.name.name.length < 2) {
+            ShowToast('critical' , 'Your name must have between 2 and 50 characters');
+            return;
+        }
+        if (this.state.password === '' || this.state.passwordConfirmation === '') {
+            ShowToast('critical','Both passwords are mandatory');
+            return;
+        }
+        let rgPass = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,12}$/);
+        if(!rgPass.test(this.state.password)) {
+            ShowToast('critical', 'Password must have between 4 and 12 digits and must include numbers, lower and upper letters');
+            return;
+        }
+        if (this.state.password !== this.state.passwordConfirmation) {
+            ShowToast('critical', 'Passwords do not match')
+            return;
+        }
+        this.displayNextForm()
     }
     renderStep0() {
         if (this.state.step == 0) {
@@ -450,13 +473,47 @@ class Register extends React.Component {
         }
         return;
     }
-
+    renderStep2() {
+        if (this.state.step == 2) {
+            return (
+                <View>
+                    <View style={style.formRow}>
+                        <TextInput
+                            style={style.textInput}
+                            value={this.state.name.name}
+                            placeholder="Your name"
+                            underlineColorAndroid='transparent'
+                            onChangeText={value => this.setState({ name: { title: '', name: value }})}/>
+                    </View>
+                    <View style={style.formRow}>
+                        <TextInput
+                            style={style.textInput}
+                            value={this.state.password}
+                            placeholder="Choose a password"
+                            secureTextEntry={true}
+                            underlineColorAndroid='transparent'
+                            onChangeText={value => this.setState({password: value})}/>
+                    </View>
+                    <View style={style.formRow}>
+                        <TextInput
+                            style={style.textInput}
+                            value={this.state.passwordConfirmation}
+                            placeholder="Confirm your password"
+                            secureTextEntry={true}
+                            underlineColorAndroid='transparent'
+                            onChangeText={value => this.setState({passwordConfirmation: value})}/>
+                    </View>
+                </View>
+            );
+        }
+    }
     render() {
         return (
             <View behavior="padding" style={style.page}>
                 <Animated.View style={[style.form, {opacity: this.state.fadeAnim}]}>
                     {this.renderStep0()}
                     {this.renderStep1()}
+                    {this.renderStep2()}
                 </Animated.View>
                 <View style={style.progress}>
                     <StepProgress step={this.state.step} steps={totalSteps}/>
