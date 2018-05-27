@@ -1,6 +1,5 @@
 import React from 'react'
-import { Router, Stack, Scene } from 'react-native-router-flux'
-import {Actions} from 'react-native-router-flux'
+import {Router, Stack, Scene, Actions} from 'react-native-router-flux'
 import {Image} from 'react-native'
 
 // Scenes
@@ -16,11 +15,11 @@ export default props => (
     <Stack key='root'>
       <Scene key='welcome' component={Welcome} title='Welcome' hideNavBar />
       <Scene key='home' component={Home} title='Home' hideNavBar={false} left={() => null} />
-        <Scene key='textView' component={TextView} title='' hideNavBar={ false } backTitle=' ' />
-        <Scene key='register' component={Register} title='Registration' hideNavBar={ false }
-               left={<Image style={{height:40, width: 50, marginLeft: 10, marginTop:3}} source={require('../imgs/nelson.png')}></Image>}
-               rightTitle={'X'}
-               onRight={ () => Actions.welcome()} initial/>
+      <Scene key='textView' component={TextView} title='' hideNavBar={false} backTitle=' ' />
+      <Scene key='register' component={Register} title='Registration' hideNavBar={false}
+        left={<Image style={{height: 40, width: 50, marginLeft: 10, marginTop: 3}} source={require('../imgs/nelson.png')} />}
+        rightTitle={'X'}
+        onRight={() => Actions.welcome()} initial />
     </Stack>
   </Router>
 )

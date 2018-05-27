@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity, Dimensions, TextInput} from 'react-native'
 import Image from 'react-native-scalable-image'
 import FontAwesome, {Icons} from 'react-native-fontawesome'
 import {Actions} from 'react-native-router-flux'
-import {setAppUser,setAppSpinner} from '../../actions/AppActions'
+import {setAppUser, setAppSpinner} from '../../actions/AppActions'
 import {ShowToast, WriteToLocalDB} from '../../libs/utils'
 import {Login} from '../../services/session'
 
@@ -19,22 +19,22 @@ class welcome extends React.Component {
       password: 'Abc1234'
     }
   }
-  goToRegister() {
-      //Actions.Register();
+  goToRegister () {
+    // Actions.Register();
   }
   goToTos () {
     Actions.textView({
-        title: 'Terms',
-        text: this.props.texts.tos,
-        showButton: true,
-        buttonTitle :  'I agree',
-        buttonAction : this.goToRegister
+      title: 'Terms',
+      text: this.props.texts.tos,
+      showButton: true,
+      buttonTitle: 'I agree',
+      buttonAction: this.goToRegister
     })
   }
   doLogin () {
     this.props.setAppSpinner({
-        visible: true,
-        text: 'Logging you...'
+      visible: true,
+      text: 'Logging you...'
     })
     let loginBody = {
       usernameOrMobile: this.state.username,
@@ -48,27 +48,27 @@ class welcome extends React.Component {
       Login(loginBody).then(response => {
         const rd = response.data
         if (response.status === 200) {
-            this.props.setAppSpinner({
-                visible: false,
-                text: ''
-            })
+          this.props.setAppSpinner({
+            visible: false,
+            text: ''
+          })
           this.props.setAppUser(rd.data)
           WriteToLocalDB('user', JSON.stringify(rd.data))
           Actions.home()
         } else {
           ShowToast('critical', 'Invalid Credentials')
-            this.props.setAppSpinner({
-                visible: false,
-                text: ''
-            })
+          this.props.setAppSpinner({
+            visible: false,
+            text: ''
+          })
         }
       })
     } catch (err) {
       ShowToast('critical', 'Server error')
-        this.props.setAppSpinner({
-            visible: false,
-            text: ''
-        })
+      this.props.setAppSpinner({
+        visible: false,
+        text: ''
+      })
     }
   }
 
@@ -165,4 +165,4 @@ const mapStateToProps = state => (
     localRnd: state.AppReducer.localRnd
   }
 )
-export default connect(mapStateToProps, {setAppUser,setAppSpinner})(welcome)
+export default connect(mapStateToProps, {setAppUser, setAppSpinner})(welcome)
