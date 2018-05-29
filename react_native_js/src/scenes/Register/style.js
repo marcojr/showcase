@@ -143,5 +143,16 @@ export default StyleSheet.create({
   groupItemText: {
     fontSize: 18,
     paddingLeft: 5
+  },
+  smsText: {
+    alignItems: 'center',
+    marginTop: 15
+  },
+  smsWarning: {
+    fontSize: 11,
+    color: 'red'
+  },
+  formattedPhoneNumber: {
+    color: 'black'
   }
 })

@@ -229,6 +229,23 @@ class Register extends React.Component {
       showButton: false
     })
   }
+  showSmsMessage () {
+    if (this.state.address.country.iso === '' || this.state.mobileNumber === '') {
+      return (
+        <View style={style.smsText}>
+          <Text style={style.smsWarning}>A SMS text will be sent to the mobile number informed by you</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={style.smsText}>
+          <Text style={style.smsWarning}>A SMS text will be sent to <Text style={style.formattedPhoneNumber}>
+                +{this.state.address.country.areaCode}{this.state.mobileNumber.substring(0, 1) === '0' ? this.state.mobileNumber.substring(1) : this.state.mobileNumber}
+          </Text></Text>
+        </View>
+      )
+    }
+  }
   performAvailabilityChecks () {
     return new Promise(resolve => {
       let checks = [
@@ -483,6 +500,7 @@ class Register extends React.Component {
               placeholder='Choose an username'
               onChangeText={value => this.setState({username: value})} />
           </View>
+          {this.showSmsMessage()}
         </View>
       )
     }

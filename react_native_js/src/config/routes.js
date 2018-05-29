@@ -19,7 +19,7 @@ export default props => (
       <Scene key='register' component={Register} title='Registration' hideNavBar={false}
         left={<Image style={{height: 40, width: 50, marginLeft: 10, marginTop: 3}} source={require('../imgs/nelson.png')} />}
         rightTitle={'X'}
-        onRight={() => Actions.welcome()} /> 
+        onRight={() => Actions.welcome()} />
     </Stack>
   </Router>
 )
