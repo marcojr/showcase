@@ -9,9 +9,9 @@ import {StepProgress} from '../../components'
 import ModalSelector from 'react-native-modal-selector'
 import FontAwesome, {Icons} from 'react-native-fontawesome'
 import ImagePicker from 'react-native-image-crop-picker'
-import {CheckAvailability, SendSMS, ConfirmSMS} from '../../services/registration'
+import {CheckAvailability, SendSMS, ConfirmSMS, RegisterUser} from '../../services/registration'
 import {ShowToast} from '../../libs/utils'
-
+import {setAppSpinner} from '../../actions/AppActions'
 import style from './style'
 
 class Register extends React.Component {
@@ -41,17 +41,17 @@ class Register extends React.Component {
         title: '',
         name: 'My name'
       },
-      birthDay: '',
+      birthDay: null,
       bio: '',
-      gender: '',
+      gender: null,
       address: {
         streetLine1: '',
         streetLine2: '',
         city: '',
         stateOrCounty: '',
         postCode: '',
-        latitude: '',
-        longitude: '',
+        latitude: null,
+        longitude: null,
         country: {
           iso: '',
           name: '',
@@ -59,12 +59,22 @@ class Register extends React.Component {
         }
       },
       venues: [],
+      venuesDataSet: [],
       email: 'xxxx@edeee.com',
       privacyOptions: [],
-      tos: '',
+      tos: this.props.tos,
       picturePreview: null,
       customData: {}
     }
+    this.props.venuesList.map(v => {
+      const nv = Object.assign({inUse: false}, v)
+      this.setState({venuesDataSet: this.state.venuesDataSet.push(nv)})
+    })
+    this.props.privacyList.map(p => {
+      const np = Object.assign({selected: false}, p)
+      np.value = 0
+      this.setState({privacyOptions: this.state.privacyOptions.push(np)})
+    })
   }
 
   componentDidMount () {
@@ -110,8 +120,8 @@ class Register extends React.Component {
                 city: '',
                 stateOrCounty: '',
                 postCode: '',
-                latitude: '',
-                longitude: '',
+                latitude: null,
+                longitude: null,
                 country: itemValue.fullObject
               }
             }
@@ -129,14 +139,23 @@ class Register extends React.Component {
   }
 
   bottomButtomAction () {
-    if (this.state.step === 0) {
-      this.submitStep0()
-    }
-    if (this.state.step === 1) {
-      this.submitStep1()
-    }
-    if (this.state.step === 2) {
-      this.submitStep2()
+    switch (this.state.step) {
+      case 0:
+        this.submitStep0()
+        break
+      case 1:
+        this.submitStep1()
+        break
+      case 2:
+        this.submitStep2()
+        break
+      case 3:
+        this.displayNextForm()
+        this.setState({buttonTextText: 'Finish Now !'})
+        break
+      case 4:
+        this.register()
+        break
     }
   }
 
@@ -150,7 +169,7 @@ class Register extends React.Component {
         codeInp2: '',
         codeInp3: '',
         codeInp4: '',
-        code: ''
+        phoneCode: ''
       })
       this.code1.focus()
       SendSMS(this.state.fullMobileNumber).then(successfully => {
@@ -203,7 +222,13 @@ class Register extends React.Component {
       )
     }
   }
-
+  showInfo (name, txt) {
+    Actions.textView({
+      title: name,
+      text: txt,
+      showButton: false
+    })
+  }
   performAvailabilityChecks () {
     return new Promise(resolve => {
       let checks = [
@@ -253,7 +278,30 @@ class Register extends React.Component {
       })
     })
   }
-
+  setPrivacyValue (newSelectedValue, privacyOption, index) {
+    let updated = Object.assign(this.state.privacyOptions)
+    updated[index].selected = newSelectedValue
+    if (newSelectedValue && updated[index].availableOptions.length === 3) {
+      updated[index].value = 2
+    }
+    if (!newSelectedValue && updated[index].availableOptions.length === 3) {
+      updated[index].value = 0
+    }
+    if (updated[index].availableOptions.length === 2) {
+      updated[index].value = updated[index].selected ? 2 : 0
+    }
+    this.setState({privacyOptions: updated})
+  }
+  setVenueValue (newSelectedValue, index) {
+    let updatedDS = Object.assign(this.state.venuesDataSet)
+    updatedDS[index].inUse = newSelectedValue
+    this.setState({venuesDataSet: updatedDS})
+    let updatedArray = []
+    this.state.venuesDataSet.map(v => {
+      if (v.inUse) { updatedArray.push(v.key) }
+    })
+    this.setState({venues: updatedArray})
+  }
   submitStep0 () {
     if (this.state.address.country.iso === '' || !this.state.mobileNumber || !this.state.email || !this.state.username) {
       ShowToast('critical', 'All fields are mandatory')
@@ -309,10 +357,8 @@ class Register extends React.Component {
   }
 
   async submitStep1 () {
-    console.log(this.state.code, this.state.fullMobileNumber)
     try {
-      const response = await ConfirmSMS(this.state.code, this.state.fullMobileNumber)
-      console.log(response)
+      const response = await ConfirmSMS(this.state.phoneCode, this.state.fullMobileNumber)
       if (response.status === 200) {
         const {data} = response.data
         this.setState({phoneUUID: data.uuid})
@@ -324,14 +370,14 @@ class Register extends React.Component {
             codeInp2: '',
             codeInp3: '',
             codeInp4: '',
-            code: ''
+            phoneCode: ''
           })
           this.code1.focus()
         }, 750)
         ShowToast('critical', 'Invalid code - Please retry')
       }
     } catch (err) {
-      this.showToast('critical', 'Unable to proceed - Server error')
+      ShowToast('critical', 'Unable to proceed - Server error')
     }
   }
 
@@ -354,6 +400,45 @@ class Register extends React.Component {
       return
     }
     this.displayNextForm()
+  }
+  register () {
+    if (this.state.venues.length < 1) {
+      ShowToast('critical', 'Choose at least one venue')
+      return
+    }
+    this.props.setAppSpinner({visible: true, text: 'Registering...'})
+    const postParams = (({ username, phoneUUID, phoneCode, picture,
+      password, name, bio, gender, birthDay, address, email,
+      privacyOptions, venues, tos, customData }) => ({
+      username,
+      phoneUUID,
+      phoneCode,
+      picture,
+      password,
+      name,
+      bio,
+      gender,
+      birthDay,
+      address,
+      email,
+      privacyOptions,
+      venues,
+      tos,
+      customData }))(this.state)
+    try {
+      RegisterUser(postParams).then(response => {
+        this.props.setAppSpinner({visible: false, text: ''})
+        if (response.status === 200) {
+          ShowToast('successfully', 'Successfully Registered ! Please login.')
+          Actions.welcome()
+        } else {
+          ShowToast('critical', 'Unable to register - Server error (1)')
+        }
+      })
+    } catch (ex) {
+      this.props.setAppSpinner({visible: false, text: ''})
+      ShowToast('critical', 'Unable to register - Server error (2)')
+    }
   }
 
   renderStep0 () {
@@ -424,11 +509,11 @@ class Register extends React.Component {
               <TextInput ref={(inp) => {
                 this.code1 = inp
               }}
-              maxLength={1}
-                value={this.state.codeInp1}
+                maxLength={1}
+              value={this.state.codeInp1}
                 style={style.codeTextInput}
                 underlineColorAndroid='transparent'
-              keyboardType='numeric'
+                keyboardType='numeric'
                 onChangeText={(text) => {
                 this.setState({codeInp1: text})
                 this.code2.focus()
@@ -492,7 +577,7 @@ class Register extends React.Component {
                 } else {
                   this.setState({codeInp4: text})
                   this.setState({
-                    code: this.state.codeInp1 +
+                    phoneCode: this.state.codeInp1 +
                                                    this.state.codeInp2 +
                                                    this.state.codeInp3 +
                                                    text
@@ -580,7 +665,41 @@ class Register extends React.Component {
       )
     }
   }
-
+  renderStep4 () {
+    if (this.state.step === 4) {
+      return (
+        <View style={style.step4}>
+          <Text style={style.groupTitle}>Favorites Venues</Text>
+          {this.state.venuesDataSet.map((venue, index) => {
+            return (
+              <View style={style.groupItem} key={venue.key}>
+                <View style={style.groupTextWrapper}>
+                  <TouchableOpacity onPress={() => this.showInfo(venue.name, venue.description)}>
+                    <Text style={style.groupItemInfo}><FontAwesome>{Icons.infoCircle}</FontAwesome></Text>
+                  </TouchableOpacity>
+                  <Text style={style.groupItemText}>{venue.name}</Text>
+                </View>
+                <Switch onTintColor='#68d6f9' value={venue.inUse}
+                  onValueChange={(val => this.setVenueValue(val, index))} />
+              </View>
+            )
+          })}
+          <Text style={style.groupTitle}>Initial Privacy Settings</Text>
+          {this.state.privacyOptions.map((privacy, index) => {
+            return (
+              <View style={style.groupItem} key={privacy.key}>
+                <View style={style.groupTextWrapper}>
+                  <Text style={style.groupItemText}>{privacy.desc}</Text>
+                </View>
+                <Switch onTintColor='#68d6f9' value={privacy.value > 0}
+                  onValueChange={val => this.setPrivacyValue(val, privacy, index)} />
+              </View>
+            )
+          })}
+        </View>
+      )
+    }
+  }
   render () {
     return (
       <View behavior='padding' style={style.page}>
@@ -589,6 +708,7 @@ class Register extends React.Component {
           {this.renderStep1()}
           {this.renderStep2()}
           {this.renderStep3()}
+          {this.renderStep4()}
         </Animated.View>
         <View style={style.progress}>
           <StepProgress step={this.state.step} steps={totalSteps} />
@@ -625,4 +745,4 @@ const mapStateToProps = state => (
   }
 )
 
-export default connect(mapStateToProps, {})(Register)
+export default connect(mapStateToProps, {setAppSpinner})(Register)

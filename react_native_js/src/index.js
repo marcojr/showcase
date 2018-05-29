@@ -46,7 +46,6 @@ class App extends React.Component {
       store.dispatch(setAppInitialLoad(response.data.data))
       store.dispatch(setAppSpinner({visible: false, text: ''}))
       this.setState({initialized: true})
-      console.log(store.getState())
     })
   }
   render () {

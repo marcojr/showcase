@@ -17,3 +17,6 @@ export const SendSMS = (mobileNumber) => {
 export const ConfirmSMS = (code, mobileNumber) => {
   return api.post(BACKEND.endpoints.registration.confirmSMS, {mobileNumber, code})
 }
+export const RegisterUser = (allParameters) => {
+  return api.post(BACKEND.endpoints.registration.register, allParameters)
+}

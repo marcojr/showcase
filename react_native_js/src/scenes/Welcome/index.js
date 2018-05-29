@@ -20,7 +20,7 @@ class welcome extends React.Component {
     }
   }
   goToRegister () {
-    // Actions.Register();
+    Actions.Register()
   }
   goToTos () {
     Actions.textView({
