@@ -11,7 +11,7 @@ export default StyleSheet.create({
     padding: 15
   },
   lower: {
-    flex: 1 ,
+    flex: 1,
     justifyContent: 'flex-end'
   },
   buttons: {

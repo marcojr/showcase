@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, Text, Image} from 'react-native'
-import ViewOverflow from 'react-native-view-overflow';
+import ViewOverflow from 'react-native-view-overflow'
 
 import style from './style'
 

@@ -83,13 +83,6 @@ class Register extends React.Component {
     Keyboard.addListener('keyboardDidShow', () => this.setState({ showFooter: false}))
     Keyboard.addListener('keyboardDidHide', () => this.setState({ showFooter: true}))
   }
-  _keyboardDidShow () {
-
-  }
-
-  _keyboardDidHide () {
-    this.setState({ showFooter: true})
-  }
 
   fadeIn () {
     Animated.timing(
