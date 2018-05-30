@@ -11,7 +11,7 @@ export default StyleSheet.create({
     padding: 15
   },
   lower: {
-    flex: 1,
+    flex: 1 ,
     justifyContent: 'flex-end'
   },
   buttons: {
@@ -40,7 +40,7 @@ export default StyleSheet.create({
   },
   loginFormRow: {
     flexDirection: 'row',
-    padding: 15
+    padding: 6
   },
   loginFormBottomBorder: {
     borderBottomWidth: 1,

@@ -2,7 +2,7 @@ import React from 'react'
 import {Actions} from 'react-native-router-flux'
 import {
   Animated, View, Text, Button, TextInput,
-  TouchableOpacity, Image, Switch, Keyboard, KeyboardAvoidingView, Platform
+  TouchableOpacity, Image, Switch, Keyboard, KeyboardAvoidingView, ScrollView
 } from 'react-native'
 import {connect} from 'react-redux'
 import {StepProgress} from '../../components'
@@ -64,7 +64,8 @@ class Register extends React.Component {
       privacyOptions: [],
       tos: this.props.tos,
       picturePreview: null,
-      customData: {}
+      customData: {},
+      showFooter: true
     }
     this.props.venuesList.map(v => {
       const nv = Object.assign({inUse: false}, v)
@@ -79,6 +80,15 @@ class Register extends React.Component {
 
   componentDidMount () {
     this.fadeIn()
+    Keyboard.addListener('keyboardDidShow', () => this.setState({ showFooter: false}))
+    Keyboard.addListener('keyboardDidHide', () => this.setState({ showFooter: true}))
+  }
+  _keyboardDidShow () {
+
+  }
+
+  _keyboardDidHide () {
+    this.setState({ showFooter: true})
   }
 
   fadeIn () {
@@ -222,6 +232,7 @@ class Register extends React.Component {
       )
     }
   }
+
   showInfo (name, txt) {
     Actions.textView({
       title: name,
@@ -229,6 +240,7 @@ class Register extends React.Component {
       showButton: false
     })
   }
+
   showSmsMessage () {
     if (this.state.address.country.iso === '' || this.state.mobileNumber === '') {
       return (
@@ -240,12 +252,13 @@ class Register extends React.Component {
       return (
         <View style={style.smsText}>
           <Text style={style.smsWarning}>A SMS text will be sent to <Text style={style.formattedPhoneNumber}>
-                +{this.state.address.country.areaCode}{this.state.mobileNumber.substring(0, 1) === '0' ? this.state.mobileNumber.substring(1) : this.state.mobileNumber}
+                        +{this.state.address.country.areaCode}{this.state.mobileNumber.substring(0, 1) === '0' ? this.state.mobileNumber.substring(1) : this.state.mobileNumber}
           </Text></Text>
         </View>
       )
     }
   }
+
   performAvailabilityChecks () {
     return new Promise(resolve => {
       let checks = [
@@ -295,6 +308,7 @@ class Register extends React.Component {
       })
     })
   }
+
   setPrivacyValue (newSelectedValue, privacyOption, index) {
     let updated = Object.assign(this.state.privacyOptions)
     updated[index].selected = newSelectedValue
@@ -309,16 +323,20 @@ class Register extends React.Component {
     }
     this.setState({privacyOptions: updated})
   }
+
   setVenueValue (newSelectedValue, index) {
     let updatedDS = Object.assign(this.state.venuesDataSet)
     updatedDS[index].inUse = newSelectedValue
     this.setState({venuesDataSet: updatedDS})
     let updatedArray = []
     this.state.venuesDataSet.map(v => {
-      if (v.inUse) { updatedArray.push(v.key) }
+      if (v.inUse) {
+        updatedArray.push(v.key)
+      }
     })
     this.setState({venues: updatedArray})
   }
+
   submitStep0 () {
     if (this.state.address.country.iso === '' || !this.state.mobileNumber || !this.state.email || !this.state.username) {
       ShowToast('critical', 'All fields are mandatory')
@@ -365,6 +383,14 @@ class Register extends React.Component {
         SendSMS(this.state.fullMobileNumber).then(successfully => {
           if (successfully) {
             this.displayNextForm()
+            setTimeout(() => {
+              this.code1.focus()
+              setInterval(() => {
+                if (this.state.resendTimeOut > 0) {
+                  this.setState({resendTimeOut: this.state.resendTimeOut - 1})
+                }
+              }, 1000)
+            }, 800)
           } else {
             ShowToast('critical', 'Unable to send SMS - Server error')
           }
@@ -372,7 +398,6 @@ class Register extends React.Component {
       }
     })
   }
-
   async submitStep1 () {
     try {
       const response = await ConfirmSMS(this.state.phoneCode, this.state.fullMobileNumber)
@@ -418,15 +443,18 @@ class Register extends React.Component {
     }
     this.displayNextForm()
   }
+
   register () {
     if (this.state.venues.length < 1) {
       ShowToast('critical', 'Choose at least one venue')
       return
     }
     this.props.setAppSpinner({visible: true, text: 'Registering...'})
-    const postParams = (({ username, phoneUUID, phoneCode, picture,
+    const postParams = (({
+      username, phoneUUID, phoneCode, picture,
       password, name, bio, gender, birthDay, address, email,
-      privacyOptions, venues, tos, customData }) => ({
+      privacyOptions, venues, tos, customData
+    }) => ({
       username,
       phoneUUID,
       phoneCode,
@@ -441,7 +469,8 @@ class Register extends React.Component {
       privacyOptions,
       venues,
       tos,
-      customData }))(this.state)
+      customData
+    }))(this.state)
     try {
       RegisterUser(postParams).then(response => {
         this.props.setAppSpinner({visible: false, text: ''})
@@ -508,18 +537,6 @@ class Register extends React.Component {
 
   renderStep1 () {
     if (this.state.step === 1) {
-      setTimeout(() => {
-        if (this.state.codeInp1 === '' && this.state.codeInp2 === '' &&
-                    this.state.codeInp3 === '' && this.state.codeInp4 === '' &&
-                    this.state.resendTimeOut === 60) {
-          this.code1.focus()
-          setInterval(() => {
-            if (this.state.resendTimeOut > 0) {
-              this.setState({resendTimeOut: this.state.resendTimeOut - 1})
-            }
-          }, 1000)
-        }
-      }, 800)
       return (
         <View style={style.step1}>
           <View style={style.codeEntry}>
@@ -528,10 +545,10 @@ class Register extends React.Component {
                 this.code1 = inp
               }}
                 maxLength={1}
-              value={this.state.codeInp1}
+                value={this.state.codeInp1}
                 style={style.codeTextInput}
                 underlineColorAndroid='transparent'
-                keyboardType='numeric'
+              keyboardType='numeric'
                 onChangeText={(text) => {
                 this.setState({codeInp1: text})
                 this.code2.focus()
@@ -543,12 +560,12 @@ class Register extends React.Component {
               <TextInput ref={(inp) => {
                 this.code2 = inp
               }}
-              maxLength={1}
-                value={this.state.codeInp2}
-                style={style.codeTextInput}
+                maxLength={1}
+              value={this.state.codeInp2}
+              style={style.codeTextInput}
                 underlineColorAndroid='transparent'
               keyboardType='numeric'
-              onChangeText={(text) => {
+                onChangeText={(text) => {
                 this.setState({codeInp2: text})
                 if (text === '') {
                   this.code1.focus()
@@ -583,11 +600,11 @@ class Register extends React.Component {
               <TextInput ref={(inp) => {
                 this.code4 = inp
               }}
-              maxLength={1}
-              value={this.state.codeInp4}
-                style={style.codeTextInput}
+                maxLength={1}
+                value={this.state.codeInp4}
+              style={style.codeTextInput}
                 keyboardType='numeric'
-              underlineColorAndroid='transparent'
+                underlineColorAndroid='transparent'
                 onChangeText={(text) => {
                 this.setState({codeInp4: text})
                 if (text === '') {
@@ -683,6 +700,7 @@ class Register extends React.Component {
       )
     }
   }
+
   renderStep4 () {
     if (this.state.step === 4) {
       return (
@@ -718,28 +736,43 @@ class Register extends React.Component {
       )
     }
   }
-  render () {
-    return (
-      <View behavior='padding' style={style.page}>
-        <Animated.View style={[style.form, {opacity: this.state.fadeAnim}]}>
-          {this.renderStep0()}
-          {this.renderStep1()}
-          {this.renderStep2()}
-          {this.renderStep3()}
-          {this.renderStep4()}
-        </Animated.View>
-        <View style={style.progress}>
-          <StepProgress step={this.state.step} steps={totalSteps} />
-          <View style={style.stepDescriptionContainer}>
-            <Text style={style.stepDescriptionText}>{stepDescs[this.state.step]}</Text>
+  renderFooter () {
+    if (this.state.showFooter) {
+      return (
+        <View style={{flex: 4}}>
+          <View style={style.progress}>
+            <StepProgress step={this.state.step} steps={totalSteps} />
+            <View style={style.stepDescriptionContainer}>
+              <Text style={style.stepDescriptionText}>{stepDescs[this.state.step]}</Text>
+            </View>
+          </View>
+          <View style={style.footer}>
+            <Button color='#68d6f9'
+              style={style.button}
+              title={this.state.buttonText}
+              onPress={() => this.bottomButtomAction()} />
           </View>
         </View>
-        <View style={style.footer}>
-          <Button color='#68d6f9'
-            style={style.button}
-            title={this.state.buttonText}
-            onPress={() => this.bottomButtomAction()} />
+      )
+    }
+  }
+  render () {
+    return (
+      <View style={style.page}>
+        <View style={{flex: 16}}>
+          <ScrollView>
+            <KeyboardAvoidingView behavior='padding'>
+              <Animated.View style={[style.form, {opacity: this.state.fadeAnim}]}>
+                {this.renderStep0()}
+                {this.renderStep1()}
+                {this.renderStep2()}
+                {this.renderStep3()}
+                {this.renderStep4()}
+              </Animated.View>
+            </KeyboardAvoidingView>
+          </ScrollView>
         </View>
+        {this.renderFooter()}
       </View>
     )
   }

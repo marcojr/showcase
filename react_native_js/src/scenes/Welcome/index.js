@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {View, Text, TouchableOpacity, Dimensions, TextInput} from 'react-native'
-import Image from 'react-native-scalable-image'
+import {View, Text, TouchableOpacity, Dimensions, TextInput, Keyboard,Animated} from 'react-native'
+import ImageSelfScale from 'react-native-scalable-image'
 import FontAwesome, {Icons} from 'react-native-fontawesome'
 import {Actions} from 'react-native-router-flux'
 import {setAppUser, setAppSpinner} from '../../actions/AppActions'
@@ -16,9 +16,42 @@ class welcome extends React.Component {
     this.state = {
       mode: 'chooseAction',
       username: 'bob',
-      password: 'Abc1234'
+      password: 'Abc1234',
+        showFooter: true,
+        logoWidth: new Animated.Value(sw),
+        logoHeight: new Animated.Value(sh)
     }
   }
+    logoLarge () {
+        Animated.parallel([
+        Animated.timing(
+            this.state.logoWidth,
+            {toValue: sw}
+        ),
+        Animated.timing(
+            this.state.logoHeight,
+            {toValue: sh}
+        )
+            ]).start()
+    }
+
+    logoSmall () {
+        Animated.parallel([
+        Animated.timing(
+            this.state.logoWidth,
+            {toValue: sw /2}
+        ),
+        Animated.timing(
+            this.state.logoHeight,
+            {toValue: sh /2}
+        )
+            ]).start()
+    }
+  componentDidMount () {
+        Keyboard.addListener('keyboardDidShow', () => this.setState({ showFooter: false}))
+        Keyboard.addListener('keyboardDidHide', () => this.setState({ showFooter: true}))
+      this.logoLarge()
+    }
   goToRegister () {
     Actions.register()
   }
@@ -79,7 +112,15 @@ class welcome extends React.Component {
           <TouchableOpacity style={style.buttons} onPress={() => this.goToTos()}>
             <Text style={style.buttonsText}>New User</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={style.buttons} onPress={() => this.setState({mode: 'input'})}>
+          <TouchableOpacity style={style.buttons} onPress={() => {
+              {
+                  this.setState({mode: 'input'})
+                  this.logoSmall()
+                  setTimeout(() => {
+                      this.username.focus()
+                  },100)
+              }
+          }}>
             <Text style={style.buttonsText}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -95,6 +136,9 @@ class welcome extends React.Component {
             </View>
             <View style={style.loginFormCol2}>
               <TextInput
+                  ref={(inp) => {
+                      this.username = inp
+                  }}
                 style={style.input} placeholderTextColor='#9ce7ff'
                 underlineColorAndroid='transparent'
                 placeholder='Username'
@@ -132,7 +176,10 @@ class welcome extends React.Component {
             </View>
           </View>
           <View style={style.loginFormRow}>
-            <TouchableOpacity onPress={() => this.hideInputs()}>
+            <TouchableOpacity onPress={() => {
+              this.setState({mode: 'chooseAction'})
+                this.logoLarge()
+            }}>
               <Text>Cancel</Text>
             </TouchableOpacity>
           </View>
@@ -140,24 +187,28 @@ class welcome extends React.Component {
       )
     }
   }
-
+  renderFooter() {
+    if(this.state.showFooter){
+      return(<View style={style.lower}>
+          <ImageSelfScale width={Dimensions.get('window').width} source={require('../../imgs/springfield.png')} />
+      </View>)
+    }
+  }
   render () {
     return (
       <View style={style.page}>
         <View style={style.upper}>
-          <Image width={this.state.mode === 'chooseAction' ? sw : sw / 2}
+          <Animated.Image style={{width: this.state.logoWidth,  height:this.state.logoHeight}}
             source={require('../../imgs/homer.png')} />
           {this.renderBellowLogo()}
         </View>
-        <View style={style.lower}>
-          <Image width={Dimensions.get('window').width} source={require('../../imgs/springfield.png')} />
-        </View>
+          {this.renderFooter()}
       </View>
     )
   }
 }
-
-const sw = Dimensions.get('window').height > 600 ? Dimensions.get('window').width * 0.40 : Dimensions.get('window').width * 0.35
+const sw = Dimensions.get('window').height > 600 ? Dimensions.get('window').width * 0.40 : Dimensions.get('window').width * 0.30
+const sh = sw * (647/466) // proportional ratio
 const mapStateToProps = state => (
   {
     texts: state.AppReducer.texts,

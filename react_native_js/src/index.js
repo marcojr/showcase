@@ -23,6 +23,7 @@ class App extends React.Component {
   }
   componentDidMount () {
     store.dispatch(setAppSpinner({visible: true, text: 'Loading...'}))
+    console.disableYellowBox = true
     let rnd = Math.random()
     ReadFromLocalDB('localRnd').then(res => {
       if (!res) {

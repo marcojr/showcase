@@ -13,7 +13,7 @@ export default props => (
     backButtonBarStyle={{color: '#FFF'}}
     barButtonTextStyle={{color: 'red'}}>
     <Stack key='root'>
-      <Scene key='welcome' component={Welcome} title='Welcome' hideNavBar initial />
+      <Scene key='welcome' component={Welcome} title='Welcome' hideNavBar />
       <Scene key='home' component={Home} title='Home' hideNavBar={false} left={() => null} />
       <Scene key='textView' component={TextView} title='' hideNavBar={false} backTitle=' ' />
       <Scene key='register' component={Register} title='Registration' hideNavBar={false}

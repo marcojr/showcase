@@ -16,7 +16,7 @@ export const ShowToast = (type, message) => {
   }
   Toast.show(message, {
     duration: Toast.durations.SHORT,
-    position: Toast.positions.TOP,
+    position: Toast.positions.BOTTOM,
     shadow: true,
     animation: true,
     hideOnPress: true,

@@ -5,22 +5,18 @@ export default StyleSheet.create({
     flex: 1
   },
   form: {
-    flex: 16,
     paddingTop: 15,
     paddingBottom: 15,
-    paddingLeft: 15
-    // backgroundColor: 'red'
+    paddingLeft: 15,
+    flex: 16
   },
   progress: {
-    // backgroundColor: 'blue',
-    flex: 2
+    flex: 3,
+    justifyContent: 'center'
   },
   footer: {
     flex: 2,
     justifyContent: 'center'
-  },
-  button: {
-
   },
   stepDescriptionContainer: {
     alignItems: 'center',
@@ -37,8 +33,8 @@ export default StyleSheet.create({
     padding: 15
   },
   formRow: {
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderColor: '#d7d7d7',
     marginBottom: 15
@@ -146,7 +142,7 @@ export default StyleSheet.create({
   },
   smsText: {
     alignItems: 'center',
-    marginTop: 15
+    marginTop: 5
   },
   smsWarning: {
     fontSize: 11,
